@@ -451,7 +451,7 @@ En este proyecto Sí está permitido usar librerías o frameworks
 
 La aplicación debe ser un _Single Page App_. Los pedidos los tomaremos desde una
 _tablet_, pero **no queremos una app nativa**, sino una web app que sea
-**responsive** y pueda funcionar **offline**.
+**responsive** y pueda funcionar **offline** (Progressive Web App).
 
 Necesitamos pensar bien en el aspecto UX de quienes van a tomar los pedidos,
  el tamaño y aspecto de los botones, la visibilidad del estado actual del
@@ -469,7 +469,7 @@ _lines_ y _branches_.
 
 Este proyecto incluye un _boilerplate_ con el código necesario para arrancar con
 la parte de backend ya resuelta. El _boilerplate_ incluye los siguientes
-archivos/carpetas con la configuración de Fierbase (hosting y firestore):
+archivos/carpetas con la configuración de Firebase (hosting y firestore):
 
 ```text
 .
@@ -513,7 +513,7 @@ Lo que debe ocurrir para que se satisfagan las necesidades del usuario)
 * Agregar productos al pedido.
 * Eliminar productos.
 * Ver resumen y el total de la compra.
-* Enviar pedido a cocina (guardar en alguna base de datos).
+* Enviar pedido a cocina (guardar en la base de datos de Firebase).
 * Se ve y funciona bien en una _tablet_
 
 ##### Definición de terminado
@@ -781,7 +781,7 @@ cd <cohort-id>-burger-queen
 
 # Para confirmar que todo fue bien arranca la aplicación con el siguinte comando
 # y verifica que la interfaz se abre en el navegador.
-yarn start
+npm start
 ```
 
 ### Otros recursos
