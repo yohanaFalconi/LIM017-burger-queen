@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.burgerBg {
+    background-image: url('../../../resources/burger-bg.svg');
+    background-size: cover;
+}
+
+.Navigate {
+    height: 100vh;
+}
