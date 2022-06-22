@@ -1,30 +1,21 @@
 // import logo from './logo.svg';
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SignIn from './Components/SignIn/SignIn';
+import WaiterView from './Components/WaiterView/WaiterView';
 
-const WaiterView = () => <h1>Burguer queen WV</h1>
-
-const ChefView = () => <h1>Burguer queen CV</h1>
+const ChefView = () => <h1>Burger queen CV</h1>
 
 class App extends Component {
   render() {
     return(
       <BrowserRouter>
-        <div className="App">
-          <Link to='/waiter-view' className='routeBtn'>
-            <p>I'm a waiter or waitress</p>
-            <p>Place orders</p>
-          </Link>
-          <Link to='/chef-view' className='routeBtn'>
-            <p>I'm a chef</p>
-            <p>See orders</p>
-          </Link>
           <Routes>
+            <Route exact path="/" element={<SignIn />} />
             <Route exact path="/waiter-view" element={<WaiterView />} />
             <Route exact path="/chef-view" element={<ChefView />} />
           </Routes>
-        </div>
       </BrowserRouter>
     );
   } 
