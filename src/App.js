@@ -14,12 +14,14 @@ class App extends Component {
         <div className="App">
           <Link to='/waiter-view' className='routeBtn'>
             <p>I'm a waiter or waitress</p>
-            <p>Place orders</p>
           </Link>
+          <p>Place orders</p>
+
           <Link to='/chef-view' className='routeBtn'>
             <p>I'm a chef</p>
-            <p>See orders</p>
           </Link>
+          <p>See orders</p>
+
           <Routes>
             <Route exact path="/waiter-view" element={<WaiterView />} />
             <Route exact path="/chef-view" element={<ChefView />} />
