@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.routes {
+    display: grid;
+    height: 100vh;
+    grid-auto-flow: column;
+    justify-content: space-evenly;
+    align-content: center;
+}
+
+.routeBtn {
+    width: 20vw;
+}
