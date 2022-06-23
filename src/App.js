@@ -1,9 +1,9 @@
 // import logo from './logo.svg';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from './Components/SignIn/SignIn';
-import WaiterView from './Components/WaiterView/WaiterView';
+import { WaiterView } from './Components/WaiterView/WaiterView';
 
 const ChefView = () => <h1>Burger queen CV</h1>
 
