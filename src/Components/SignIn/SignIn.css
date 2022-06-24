@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .burgerBg {
-    background-image: url('../../../resources/burger-bg.svg');
+    background-image: url('../../../public/assets/burger-bg.svg');
     background-size: cover;
 }
 
