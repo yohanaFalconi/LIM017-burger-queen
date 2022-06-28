@@ -1,7 +1,6 @@
 import './WaiterView.css';
 import bqlogo from '../../assets/bqlogo.png';
-import Icon from "../../IconMoon/Icon";
-
+import Icon from "../../IcoMoon/Icon";
 
 const waiter = 'Megan';
 function WaiterView() {
