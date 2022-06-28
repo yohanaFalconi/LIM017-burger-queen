@@ -1,6 +1,9 @@
 import './WaiterView.css';
 import bqlogo from '../../assets/bqlogo.png';
 import Icon from "../../IcoMoon/Icon";
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase-config'
+import { useEffect, useState } from 'react';
 
 const waiter = 'Megan';
 function WaiterView() {
@@ -21,11 +24,40 @@ function WaiterView() {
 
 
 function Products() {
-    return(
-        <div>
-            <p></p>
-            <p></p>
+    const [loading, setLoading] = useState(true);
+    const [items, setItems] = useState([]);
 
+    useEffect(() => {
+        getMenuItems()
+    }, [loading])
+
+    function getMenuItems() {
+        const menuCollectionRef = collection(db, 'menu-items');
+        getDocs(menuCollectionRef)
+        .then(response => {
+            const menuItems = response.docs.map(doc => ({
+                data: doc.data(),
+                id: doc.id
+            }))
+            setItems(menuItems);
+            setLoading(false);
+        }).catch(error => console.log(error))
+    }
+
+    if (loading) {
+        return <div>Loading menu...</div>;
+    }
+
+    return (
+        <div className='menu'>
+            <ul>
+            {
+                items.map(item => <li key={item.id}>
+                    <h4>{item.data.Name}</h4>
+                    <p>Price: {item.data.Price}</p>
+                </li>)
+            }
+            </ul>
         </div>
     );
 }
