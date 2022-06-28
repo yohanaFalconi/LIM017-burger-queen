@@ -2,15 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-button {
-    width : 40%;
-}
 .burgerBg {
     background-image: url('../../../src/assets/bq-background.PNG');
     background-size: cover;
 }
-
-.SignIn {
+.container {
     height: 100vh;
+    margin: 0;
 }
-

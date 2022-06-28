@@ -1,8 +1,8 @@
-const sujeto = {
+/* const sujeto = {
   nombre:'juanito', 
   url: "https://via.placeholder.com/64",
   texto: 'esto es un comentario'
-}
+} */
 
 const Saludo = (props) => {
   console.log('esto', props);

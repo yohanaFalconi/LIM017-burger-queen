@@ -5,7 +5,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from './Components/SignIn/SignIn';
 import { WaiterView } from './Components/WaiterView/WaiterView';
 import Sample from './Components/Sample';
-const ChefView = () => <h1>Burger queen CV</h1>
+import Navigate from './Components/Navigate/Navigate';
+const ChefView = () => <h1>This is the Chef View</h1>
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
       <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<SignIn />} />
+            <Route exact path="/navigate" element={<Navigate/>} />
             <Route exact path="/waiter-view" element={<WaiterView />} />
             <Route exact path="/chef-view" element={<ChefView />} />
             <Route exact path="/sample" element={<Sample/>} />
