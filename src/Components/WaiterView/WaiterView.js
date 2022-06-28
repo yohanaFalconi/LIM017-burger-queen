@@ -1,5 +1,7 @@
 import './WaiterView.css';
-import bqlogo from '../../bqlogo.png';
+import bqlogo from '../../assets/bqlogo.png';
+import Icon from "../../IconMoon/Icon";
+
 
 const waiter = 'Megan';
 function WaiterView() {
@@ -18,9 +20,14 @@ function WaiterView() {
     );
 }
 
+
 function Products() {
     return(
-        <div>Loading menu...</div>
+        <div>
+            <p></p>
+            <p></p>
+
+        </div>
     );
 }
 
@@ -40,6 +47,7 @@ function Order() {
             </label>
             <hr />
             <div>Ordered items go here</div>
+            <Icon color="blue" size={20} icon="plus" />
             <hr />
             <div>Total: $0</div>
             <div>
@@ -50,4 +58,4 @@ function Order() {
     );
 }
 
-export { WaiterView, Products, Order };
+export {WaiterView, Products, Order };
