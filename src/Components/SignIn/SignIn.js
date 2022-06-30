@@ -3,6 +3,7 @@ import './SignIn.css';
 import { auth } from '../../firebase-config';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import logo from '../../assets/bqlogo.png';
+import Icon from "../../IconMoon/Icon";
 import { useNavigate } from "react-router-dom";
 
 
@@ -18,13 +19,18 @@ function SignIn() {
 
     return (
         <div className="SignIn burgerBg h-screen">
-            <div>
-                <img className="w-80" src={logo} alt="bqlogo" />
+            <div className="logo">
+                <img className="logoSize"src={logo} alt="bqlogo" />
             </div>
-            <button className='bg-[#323131] w-60 h-14 rounded-full shadow-2xl text-[#FFFFFF] hover:bg-[#FE9C08]'
-            onClick={()=> {handleGoogleSingin()}}>
-                Sign in
-            </button>
+            <div className='flex justify-center'>
+                <div className="googleBtn">
+                    <Icon  color="white" size={25} icon="google" />
+                    <button
+                    onClick={()=> {handleGoogleSingin()}}>
+                    Sign in
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }
