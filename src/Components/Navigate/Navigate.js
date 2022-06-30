@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Navigate() {
     return(
-        <div className="burgerBg">
+        <div className="burgerBg h-screen">
             <div className='flex justify-center gap-16'>
                 <button className='navBtn'>
                     <Link to='/waiter-view'>

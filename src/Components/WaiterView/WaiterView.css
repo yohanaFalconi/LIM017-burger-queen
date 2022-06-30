@@ -10,6 +10,15 @@
     align-content: center;
 }
 
-.routeBtn {
-    width: 20vw;
+.WaiterView {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.main {
+    width: 70vw;
+}
+
+.aside {
+    width: 30vw;
 }
