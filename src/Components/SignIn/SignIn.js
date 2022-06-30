@@ -3,7 +3,7 @@ import './SignIn.css';
 import { auth } from '../../firebase-config';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import logo from '../../assets/bqlogo.png';
-import Icon from "../../IconMoon/Icon";
+import Icon from "../../IcoMoon/Icon";
 import { useNavigate } from "react-router-dom";
 
 
