@@ -8,17 +8,14 @@ import { useEffect, useState } from 'react';
 const waiter = 'Megan';
 function WaiterView() {
     return (
-        <div className='bg-slate-50'>
-            <header>
-                <img src={bqlogo} alt='Burger Queen'
-                className='h-32' />
-                <main>
-                    <Products />
-                </main>
-                <aside>
-                    <Order />
-                </aside>
-            </header>
+        <div className='bg-slate-50 WaiterView'>
+            <main className='main'>
+                <img src={bqlogo} alt='Burger Queen' className='h-32' />
+                <Products />
+            </main>
+            <aside className='aside'>
+                <Order />
+            </aside>
         </div>
     );
 }
