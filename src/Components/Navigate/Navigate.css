@@ -2,11 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.burgerBg {
-    background-image: url('../../../src/assets/bq-background.PNG');
-    background-size: cover;
+.navBtn {
+    @apply w-64 gap-5 py-4 stroke-current bg-inherit rounded-lg shadow-2xl shadow-inner text-lg  text-[#323131] hover:bg-[#FE9C08] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)];
+    margin-top: 180px;
+    height: 160px;
 }
-.container {
-    height: 100vh;
-    margin: 0;
-}
+
+

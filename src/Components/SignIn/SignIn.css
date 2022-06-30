@@ -2,15 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-button {
-    width : 40%;
+
+.logo {
+    height: 270px;
+    display: grid;
+    place-content: center; 
+}
+.logoSize{
+    width: 450px;
 }
 .burgerBg {
     background-image: url('../../../src/assets/bq-background.PNG');
     background-size: cover;
+    height: 100vh;
 }
 
-.SignIn {
-    height: 100vh;
+.googleBtn {
+    @apply flex justify-center w-60 gap-5 py-4 bg-[#323131] rounded-full shadow-2xl text-lg  text-[#FFFFFF] hover:bg-[#FE9C08];
+
 }
 
