@@ -23,6 +23,21 @@ function WaiterView() {
     );
 }
 
+function ProductItem(props) {
+    return(
+        <li key={props.item.id} className='bg-white shadow-md rounded-2xl m-3'>
+            <h4>{props.item.data.Name}</h4>
+            <img src={props.item.data.url} alt={props.item.data.Name} />
+            <p>Price: {props.item.data.Price}</p>
+            <div>
+                <button>-</button>
+                <p>{props.item.data.Count}</p>
+                <button>+</button>
+            </div>
+        </li>
+    )
+}
+
 function Products() {
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState([]);
@@ -47,22 +62,10 @@ function Products() {
     if (loading) {
         return <div>Loading menu...</div>;
     }
-
     return (
         <div className='menu grid grid-cols-4'>
             <ul className='contents'>
-            {
-                items.map(item => <li key={item.id} className='bg-white shadow-md rounded-xl m-3'>
-                    <h4>{item.data.Name}</h4>
-                    <img src={item.data.url} alt={item.data.Name} />
-                    <p>Price: {item.data.Price}</p>
-                    <div>
-                        <button>-</button>
-                        <p>{item.data.Count}</p>
-                        <button>+</button>
-                    </div>
-                </li>)
-            }
+                {items.map(item => <ProductItem item={item} />)}
             </ul>
         </div>
     );
@@ -95,4 +98,4 @@ function Order() {
     );
 }
 
-export {WaiterView, Products, Order };
+export { WaiterView, Products, Order };
