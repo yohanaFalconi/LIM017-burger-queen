@@ -8,9 +8,10 @@ import { useEffect, useState } from 'react';
 const waiter = 'Megan';
 function WaiterView() {
     return (
-        <div>
+        <div className='bg-slate-50'>
             <header>
-                <img src={bqlogo} alt='Burger Queen'/>
+                <img src={bqlogo} alt='Burger Queen'
+                className='h-32' />
                 <main>
                     <Products />
                 </main>
@@ -21,7 +22,6 @@ function WaiterView() {
         </div>
     );
 }
-
 
 function Products() {
     const [loading, setLoading] = useState(true);
@@ -49,12 +49,18 @@ function Products() {
     }
 
     return (
-        <div className='menu'>
-            <ul>
+        <div className='menu grid grid-cols-4'>
+            <ul className='contents'>
             {
-                items.map(item => <li key={item.id}>
+                items.map(item => <li key={item.id} className='bg-white shadow-md rounded-xl m-3'>
                     <h4>{item.data.Name}</h4>
+                    <img src={item.data.url} alt={item.data.Name} />
                     <p>Price: {item.data.Price}</p>
+                    <div>
+                        <button>-</button>
+                        <p>{item.data.Count}</p>
+                        <button>+</button>
+                    </div>
                 </li>)
             }
             </ul>

@@ -17,7 +17,7 @@ function SignIn() {
     }
 
     return (
-        <div className="SignIn burgerBg">
+        <div className="SignIn burgerBg h-screen">
             <div>
                 <img className="w-80" src={logo} alt="bqlogo" />
             </div>

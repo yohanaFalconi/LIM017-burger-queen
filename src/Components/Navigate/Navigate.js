@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Navigate() {
     return(
-        <div className="burgerBg container">
+        <div className="burgerBg h-screen">
             <button>
                 <Link to='/waiter-view'>
                     <p>I'm a waiter or waitress</p>

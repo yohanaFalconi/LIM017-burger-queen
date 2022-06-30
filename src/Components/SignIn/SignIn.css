@@ -9,8 +9,3 @@ button {
     background-image: url('../../../src/assets/bq-background.PNG');
     background-size: cover;
 }
-
-.SignIn {
-    height: 100vh;
-}
-
