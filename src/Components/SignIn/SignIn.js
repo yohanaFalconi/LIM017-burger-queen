@@ -19,17 +19,14 @@ function SignIn() {
 
     return (
         <div className="SignIn burgerBg h-screen">
-            <div className="logo">
-                <img className="logoSize"src={logo} alt="bqlogo" />
+            <div className="grid place-content-center ">
+                <img className="w-[450px] mt-[26vh] mb-[5vh]" src={logo} alt="bqlogo" />
             </div>
             <div className='flex justify-center'>
-                <div className="googleBtn">
-                    <Icon  color="white" size={25} icon="google" />
-                    <button
-                    onClick={()=> {handleGoogleSingin()}}>
+                <button className='googleBtn' onClick={()=> {handleGoogleSingin()}}>
+                    <Icon color="white" size={24} icon="google" />
                     Sign in
-                    </button>
-                </div>
+                </button>
             </div>
         </div>
     );
