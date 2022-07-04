@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 function Navigate() {
     return(
-        <div className="burgerBg h-screen">
-            <div className='flex justify-center gap-16'>
+        <div className="burgerBg h-screen grid place-content-center">
+            <div className='flex gap-16'>
                 <button className='navBtn'>
                     <Link to='/waiter-view'>
                         <p className='text-2xl'>I'm a waiter or waitress</p>
