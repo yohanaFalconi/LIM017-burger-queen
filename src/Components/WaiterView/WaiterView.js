@@ -1,9 +1,11 @@
 import './WaiterView.css';
 import bqlogo from '../../assets/bqlogo.png';
 import Icon from "../../IcoMoon/Icon";
+import { menuCollectionRef, getItemsById } from '../../firebase-utils';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase-config'
 import { useEffect, useState } from 'react';
+import { data } from 'autoprefixer';
 
 const waiter = 'Megan';
 let totalNumber = 0
@@ -23,17 +25,54 @@ function WaiterView() {
 }
 
 function ProductItem(props) {
+    const [ productSelected, setProductSelected ] = useState([]);
+    const [counter, setCounter] = useState(0);
+
+
+    const addProductQty = (id) => {
+        getItemsById(id).then((orderedItems) => {
+            const foundItem = productSelected.find((item) =>item.id === id);
+            if (foundItem === undefined) {
+                orderedItems.data.Count =  1;
+                setProductSelected([...productSelected, {...orderedItems}]);
+                setCounter(orderedItems.data.Count);
+            } else {
+                let addToCount = productSelected[0];
+                addToCount.data.Count = addToCount.data.Count + 1;
+                setProductSelected([...productSelected]);
+                setCounter(addToCount.data.Count);
+            }
+        })
+        .catch((err) => {console.log(err.message)});
+    }
+    const subtracProductQty = (id) => {
+        getItemsById(id).then((orderedItems) => {
+            const foundItem = productSelected.find((item) =>item.id === id);
+            if (foundItem === undefined) {
+                orderedItems.data.Count =  0;
+                setProductSelected([...productSelected, {...orderedItems}]);
+                setCounter(orderedItems.data.Count);
+            } else {
+                let addToCount = productSelected[0];
+                addToCount.data.Count = addToCount.data.Count - 1;
+                if (addToCount.data.Count < 0) addToCount.data.Count = 0;
+                setProductSelected([...productSelected]);
+                setCounter(addToCount.data.Count);
+            }
+        })
+        .catch((err) => {console.log(err.message)});
+    }
     return(
-        <li key={props.item.id} className='bg-white shadow-md rounded-2xl text-center font-poppins font-light h-[95%]'>
+        <li className='bg-white shadow-md rounded-2xl text-center font-poppins font-light h-[95%]'>
             <img src={props.item.data.url} alt={props.item.data.Name} className='h-1/2 m-3 max-w-[80%] inline-grid' />
             <h4>{props.item.data.Name}</h4>
             <p>${props.item.data.Price}</p>
             <div className='flex justify-center my-[10px]'>
-                <button className='bg-[#B5D6B2] rounded-sm'>
+                <button onClick={() =>subtracProductQty(props.item.id)} className='bg-[#B5D6B2] rounded-sm'>
                     <Icon color="#1B1A1A" size={8} icon="minus" className='mx-[6px]' />
                 </button>
-                <p className='mx-[8px]'>{props.item.data.Count}</p>
-                <button className='bg-[#B5D6B2] rounded-sm'>
+                <p>{counter}</p>
+                <button onClick={() =>addProductQty(props.item.id)} className='bg-[#B5D6B2] rounded-sm'>
                     <Icon color="#1B1A1A" size={8} icon="plus" className='mx-[6px]' />
                 </button>
             </div>
@@ -41,16 +80,15 @@ function ProductItem(props) {
     )
 }
 
+
 function Products() {
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState([]);
-
     useEffect(() => {
         getMenuItems()
     }, [loading])
 
     function getMenuItems() {
-        const menuCollectionRef = collection(db, 'menu-items');
         getDocs(menuCollectionRef)
         .then(response => {
             const menuItems = response.docs.map(doc => ({
@@ -68,7 +106,7 @@ function Products() {
     return (
         <div className='menu grid grid-cols-4 gap-5 m-5'>
             <ul className='contents'>
-                {items.map(item => <ProductItem item={item} />)}
+                {items.map(item => <ProductItem key={item.id} item={item} />)}
             </ul>
         </div>
     );
@@ -107,4 +145,6 @@ function Order() {
     );
 }
 
-export { WaiterView, Products, Order };
+
+
+export { WaiterView, Products, Order};
