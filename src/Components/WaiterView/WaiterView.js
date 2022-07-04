@@ -6,6 +6,8 @@ import { db } from '../../firebase-config'
 import { useEffect, useState } from 'react';
 
 const waiter = 'Megan';
+let totalNumber = 0
+let total = '$' + totalNumber;
 function WaiterView() {
     return (
         <div className='bg-[#FAFAFA] WaiterView'>
@@ -22,7 +24,7 @@ function WaiterView() {
 
 function ProductItem(props) {
     return(
-        <li key={props.item.id} className='bg-white shadow-md rounded-2xl text-center h-4/5 font-poppins'>
+        <li key={props.item.id} className='bg-white shadow-md rounded-2xl text-center h-90% font-poppins font-light'>
             <img src={props.item.data.url} alt={props.item.data.Name} className='h-1/2 m-3 max-w-[80%] inline-grid' />
             <h4>{props.item.data.Name}</h4>
             <p>${props.item.data.Price}</p>
@@ -57,7 +59,7 @@ function Products() {
     }
 
     if (loading) {
-        return <div>Loading menu...</div>;
+        return <div className='font-poppins font-light ml-6'>Loading menu...</div>;
     }
     return (
         <div className='menu grid grid-cols-4 gap-5 m-5'>
@@ -70,10 +72,12 @@ function Products() {
 
 function Order() {
     return(
-        <div className='bg-[#B5D6B2] rounded-2xl h-screen mt-5 font-poppins'>
-            <div className='bg-[#FAFAFA]'>Waiter: {waiter}</div>
-            <label>
-                Table:
+        <div className='bg-[#B5D6B2] shadow-md rounded-2xl h-[93vh] mt-5 font-poppins font-normal fixed w-[28vw]'>
+            <div className='bg-[#FAFAFA] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%]'>
+                Waiter: {waiter}
+            </div>
+            <div className='bg-[#FAFAFA] shadow-md rounded-2xl mx-[1vw] mb-[2vh] px-[6%] py-[1%]'>
+                <label>Table:</label>
                 <select name="select" className='bg-[#FAFAFA]'>
                     <option value="table1">1</option>
                     <option value="table2">2</option>
@@ -81,15 +85,19 @@ function Order() {
                     <option value="table4">4</option>
                     <option value="table5">5</option>
                 </select>
-            </label>
-            <hr />
+            </div>
+            <hr className='w-[90%] mx-[5%]' />
             <div>Ordered items go here</div>
-            <Icon color="blue" size={20} icon="plus" />
-            <hr />
-            <div className='bg-[#FFBF69]'>Total: $0</div>
+            <hr className='w-[90%] mx-[5%]' />
+            <div className='bg-[#FFBF69] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%] grid grid-flow-col justify-between'>
+                <p>Total:</p>
+                <p>{total}</p>
+            </div>
             <div>
-                <img src='#' alt='delete'></img>
-                <button>Send order</button>
+                <Icon color="#1B1A1A" size={26} icon="bin" className='mx-[1.8vw]' />
+                <button className='font-medium bg-[#1B1A1A] text-white shadow-md rounded-2xl px-[6%] py-[1%] w-[20vw]'>
+                    Send order
+                </button>
             </div>
         </div>
     );
