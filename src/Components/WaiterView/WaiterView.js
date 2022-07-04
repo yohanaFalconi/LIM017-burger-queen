@@ -1,9 +1,11 @@
 import './WaiterView.css';
 import bqlogo from '../../assets/bqlogo.png';
 import Icon from "../../IcoMoon/Icon";
+import { menuCollectionRef, getItemsById } from '../../firebase-utils';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase-config'
 import { useEffect, useState } from 'react';
+import { data } from 'autoprefixer';
 
 const waiter = 'Megan';
 function WaiterView() {
@@ -21,30 +23,66 @@ function WaiterView() {
 }
 
 function ProductItem(props) {
+    const [ productSelected, setProductSelected ] = useState([]);
+    const [counter, setCounter] = useState(0);
+
+
+    const addProductQty = (id) => {
+        getItemsById(id).then((orderedItems) => {
+            const foundItem = productSelected.find((item) =>item.id === id);
+            if (foundItem === undefined) {
+                orderedItems.data.Count =  1;
+                setProductSelected([...productSelected, {...orderedItems}]);
+                setCounter(orderedItems.data.Count);
+            } else {
+                let addToCount = productSelected[0];
+                addToCount.data.Count = addToCount.data.Count + 1;
+                setProductSelected([...productSelected]);
+                setCounter(addToCount.data.Count);
+            }
+        })
+        .catch((err) => {console.log(err.message)});
+    }
+    const subtracProductQty = (id) => {
+        getItemsById(id).then((orderedItems) => {
+            const foundItem = productSelected.find((item) =>item.id === id);
+            if (foundItem === undefined) {
+                orderedItems.data.Count =  0;
+                setProductSelected([...productSelected, {...orderedItems}]);
+                setCounter(orderedItems.data.Count);
+            } else {
+                let addToCount = productSelected[0];
+                addToCount.data.Count = addToCount.data.Count - 1;
+                if (addToCount.data.Count < 0) addToCount.data.Count = 0;
+                setProductSelected([...productSelected]);
+                setCounter(addToCount.data.Count);
+            }
+        })
+        .catch((err) => {console.log(err.message)});
+    }
     return(
-        <li key={props.item.id} className='bg-white shadow-md rounded-2xl m-3'>
+        <li className='bg-white shadow-md rounded-2xl m-3'>
             <h4>{props.item.data.Name}</h4>
             <img src={props.item.data.url} alt={props.item.data.Name} />
             <p>Price: {props.item.data.Price}</p>
             <div>
-                <button>-</button>
-                <p>{props.item.data.Count}</p>
-                <button>+</button>
+                <button onClick={() =>subtracProductQty(props.item.id)}>-</button>
+                <p>{counter}</p>
+                <button onClick={() =>addProductQty(props.item.id)}>+</button>
             </div>
         </li>
     )
 }
 
+
 function Products() {
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState([]);
-
     useEffect(() => {
         getMenuItems()
     }, [loading])
 
     function getMenuItems() {
-        const menuCollectionRef = collection(db, 'menu-items');
         getDocs(menuCollectionRef)
         .then(response => {
             const menuItems = response.docs.map(doc => ({
@@ -62,7 +100,7 @@ function Products() {
     return (
         <div className='menu grid grid-cols-4'>
             <ul className='contents'>
-                {items.map(item => <ProductItem item={item} />)}
+                {items.map(item => <ProductItem key={item.id} item={item} />)}
             </ul>
         </div>
     );
@@ -95,4 +133,6 @@ function Order() {
     );
 }
 
-export { WaiterView, Products, Order };
+
+
+export { WaiterView, Products, Order};
