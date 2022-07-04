@@ -24,14 +24,18 @@ function WaiterView() {
 
 function ProductItem(props) {
     return(
-        <li key={props.item.id} className='bg-white shadow-md rounded-2xl text-center h-90% font-poppins font-light'>
+        <li key={props.item.id} className='bg-white shadow-md rounded-2xl text-center font-poppins font-light h-[95%]'>
             <img src={props.item.data.url} alt={props.item.data.Name} className='h-1/2 m-3 max-w-[80%] inline-grid' />
             <h4>{props.item.data.Name}</h4>
             <p>${props.item.data.Price}</p>
-            <div className='flex justify-center'>
-                <button>-</button>
-                <p>{props.item.data.Count}</p>
-                <button>+</button>
+            <div className='flex justify-center my-[10px]'>
+                <button className='bg-[#B5D6B2] rounded-sm'>
+                    <Icon color="#1B1A1A" size={8} icon="minus" className='mx-[6px]' />
+                </button>
+                <p className='mx-[8px]'>{props.item.data.Count}</p>
+                <button className='bg-[#B5D6B2] rounded-sm'>
+                    <Icon color="#1B1A1A" size={8} icon="plus" className='mx-[6px]' />
+                </button>
             </div>
         </li>
     )
