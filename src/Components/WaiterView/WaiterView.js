@@ -2,10 +2,8 @@ import './WaiterView.css';
 import bqlogo from '../../assets/bqlogo.png';
 import Icon from "../../IcoMoon/Icon";
 import { menuCollectionRef, getItemsById } from '../../firebase-utils';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase-config'
+import { getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { data } from 'autoprefixer';
 
 const waiter = 'Megan';
 let totalNumber = 0
@@ -71,7 +69,7 @@ function ProductItem(props) {
                 <button onClick={() =>subtracProductQty(props.item.id)} className='bg-[#B5D6B2] rounded-sm'>
                     <Icon color="#1B1A1A" size={8} icon="minus" className='mx-[6px]' />
                 </button>
-                <p>{counter}</p>
+                <p className='mx-[8px]'>{counter}</p>
                 <button onClick={() =>addProductQty(props.item.id)} className='bg-[#B5D6B2] rounded-sm'>
                     <Icon color="#1B1A1A" size={8} icon="plus" className='mx-[6px]' />
                 </button>
