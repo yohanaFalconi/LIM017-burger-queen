@@ -4,73 +4,50 @@ import Icon from "../../IcoMoon/Icon";
 import { menuCollectionRef, getItemsById } from '../../firebase-utils';
 import { getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
+import { OrderInvoice } from './OrderInvoice'
 
-const waiter = 'Megan';
-let totalNumber = 0
-let total = '$' + totalNumber;
-function WaiterView() {
+const addProductQty = (props,id) => {
+    console.log('add props', props)
+    console.log(props,id);
+    getItemsById(id).then((orderedItems) => {
+        console.log(orderedItems);
+
+    })
+    .catch((err) => {console.log(err.message)});
+}
+const subtracProductQty = (props,id) => {
+    console.log('props', props)
+    getItemsById(id).then((orderedItems) => {
+        console.log(orderedItems);
+
+
+    })
+    .catch((err) => {console.log(err.message)});
+}
+
+function ChangeProductQty (props) {
+
     return (
-        <div className='bg-[#FAFAFA] WaiterView'>
-            <main className='main'>
-                <img src={bqlogo} alt='Burger Queen' className='h-24 ml-4 mt-3' />
-                <Products />
-            </main>
-            <aside className='aside'>
-                <Order />
-            </aside>
-        </div>
+        <>
+            <ProductItem counter ={props.counter++} addProductQty={[props,props.item.id]} subtracProductQty={[props,props.item.id]} />
+        </>
     );
 }
 
+
 function ProductItem(props) {
-    const [ productSelected, setProductSelected ] = useState([]);
-    const [counter, setCounter] = useState(0);
 
-
-    const addProductQty = (id) => {
-        getItemsById(id).then((orderedItems) => {
-            const foundItem = productSelected.find((item) =>item.id === id);
-            if (foundItem === undefined) {
-                orderedItems.data.Count =  1;
-                setProductSelected([...productSelected, {...orderedItems}]);
-                setCounter(orderedItems.data.Count);
-            } else {
-                let addToCount = productSelected[0];
-                addToCount.data.Count = addToCount.data.Count + 1;
-                setProductSelected([...productSelected]);
-                setCounter(addToCount.data.Count);
-            }
-        })
-        .catch((err) => {console.log(err.message)});
-    }
-    const subtracProductQty = (id) => {
-        getItemsById(id).then((orderedItems) => {
-            const foundItem = productSelected.find((item) =>item.id === id);
-            if (foundItem === undefined) {
-                orderedItems.data.Count =  0;
-                setProductSelected([...productSelected, {...orderedItems}]);
-                setCounter(orderedItems.data.Count);
-            } else {
-                let addToCount = productSelected[0];
-                addToCount.data.Count = addToCount.data.Count - 1;
-                if (addToCount.data.Count < 0) addToCount.data.Count = 0;
-                setProductSelected([...productSelected]);
-                setCounter(addToCount.data.Count);
-            }
-        })
-        .catch((err) => {console.log(err.message)});
-    }
     return(
         <li className='bg-white shadow-md rounded-2xl text-center font-poppins font-light h-[95%]'>
             <img src={props.item.data.url} alt={props.item.data.Name} className='h-1/2 m-3 max-w-[80%] inline-grid' />
             <h4>{props.item.data.Name}</h4>
             <p>${props.item.data.Price}</p>
             <div className='flex justify-center my-[10px]'>
-                <button onClick={() =>subtracProductQty(props.item.id)} className='bg-[#B5D6B2] rounded-sm'>
+                <button onClick={()=>subtracProductQty(props,props.item.id)} className='bg-[#B5D6B2] rounded-sm'>
                     <Icon color="#1B1A1A" size={8} icon="minus" className='mx-[6px]' />
                 </button>
-                <p className='mx-[8px]'>{counter}</p>
-                <button onClick={() =>addProductQty(props.item.id)} className='bg-[#B5D6B2] rounded-sm'>
+                <p className='mx-[8px]'>{props.counter}</p>
+                <button onClick={()=>addProductQty(props,props.item.id)} className='bg-[#B5D6B2] rounded-sm'>
                     <Icon color="#1B1A1A" size={8} icon="plus" className='mx-[6px]' />
                 </button>
             </div>
@@ -79,7 +56,7 @@ function ProductItem(props) {
 }
 
 
-function Products() {
+function Products(props) {
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState([]);
     useEffect(() => {
@@ -104,52 +81,39 @@ function Products() {
     return (
         <div className='menu grid grid-cols-4 gap-5 m-5'>
             <ul className='contents'>
-                {items.map(item => <ProductItem key={item.id} item={item} />)}
+                {items.map(item => <ProductItem key={item.id} item={item} props={props}/>)}
             </ul>
         </div>
     );
 }
 
-function Order() {
-    return(
-        <div className='bg-[#B5D6B2] shadow-md rounded-2xl h-[93vh] mt-5 font-poppins font-normal fixed w-[28vw]'>
-            <div className='fixedTop'>
-                <div className='bg-[#FAFAFA] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%]'>
-                    Waiter: {waiter}
-                </div>
-                <div className='bg-[#FAFAFA] shadow-md rounded-2xl mx-[1vw] mb-[2vh] px-[6%] py-[1%]'>
-                    <label>Table:</label>
-                    <select name="select" className='bg-[#FAFAFA]'>
-                        <option value="table1">1</option>
-                        <option value="table2">2</option>
-                        <option value="table3">3</option>
-                        <option value="table4">4</option>
-                        <option value="table5">5</option>
-                    </select>
-                </div>
-                <hr className='w-[90%] mx-[5%]' />
-            </div>
-            
-            <div>Ordered items go here</div>
-
-            <div className='absolute bottom-0'>
-                <hr className='w-[90%] mx-[5%]' />
-                <div className='bg-[#FFBF69] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%] grid grid-flow-col justify-between'>
-                    <p>Total:</p>
-                    <p>{total}</p>
-                </div>
-                <div className='mb-[7%]'>
-                    <Icon color="#1B1A1A" size={26} icon="bin" className='mx-[1.8vw]' />
-                    <button className='font-medium bg-[#1B1A1A] text-white shadow-md rounded-2xl px-[6%] py-[1%] w-[20vw]'>
-                        Send order
-                    </button>
-                </div>
-            </div>
-            
+function WaiterView() {
+    const [ productSelected, setProductSelected ] = useState([]);
+    const [ counter, setCounter] = useState(0);
+    // console.log('consoleando en id', id)
+    return (
+        <div className='bg-[#FAFAFA] WaiterView'>
+            <main className='main'>
+                <img src={bqlogo} alt='Burger Queen' className='h-24 ml-4 mt-3' />
+                <Products
+                productSelected={productSelected} 
+                setProductSelected={setProductSelected}
+                counter={counter}
+                setCounter={setCounter} 
+                />
+            </main>
+            <aside className='aside'>
+                <OrderInvoice 
+                productSelected={productSelected} 
+                setProductSelected={setProductSelected}
+                counter={counter}
+                setCounter={setCounter}
+                />
+            </aside>
         </div>
     );
 }
 
 
 
-export { WaiterView, Products, Order};
+export { WaiterView, Products, ChangeProductQty, ProductItem};
