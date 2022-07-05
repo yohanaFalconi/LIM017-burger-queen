@@ -4,11 +4,11 @@ import Icon from "../../IcoMoon/Icon";
 import { menuCollectionRef, getItemsById } from '../../firebase-utils';
 import { getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
+import { OrderInvoice } from './OrderInvoice'
 
-const waiter = 'Megan';
-let totalNumber = 0
-let total = '$' + totalNumber;
+
 function WaiterView() {
+    
     return (
         <div className='bg-[#FAFAFA] WaiterView'>
             <main className='main'>
@@ -16,16 +16,16 @@ function WaiterView() {
                 <Products />
             </main>
             <aside className='aside'>
-                <Order />
+                <OrderInvoice/>
             </aside>
         </div>
     );
 }
 
-function ProductItem(props) {
+function ChangeProductQty (id) {
     const [ productSelected, setProductSelected ] = useState([]);
-    const [counter, setCounter] = useState(0);
-
+    const [ counter, setCounter] = useState(0);
+    console.log('consoleando en id', id)
 
     const addProductQty = (id) => {
         getItemsById(id).then((orderedItems) => {
@@ -60,6 +60,17 @@ function ProductItem(props) {
         })
         .catch((err) => {console.log(err.message)});
     }
+    return (
+        <>
+            <ProductItem counter ={counter} addProductQty={addProductQty} subtracProductQty={subtracProductQty} />
+        </>
+    );
+}
+
+
+function ProductItem(props, {counter, addProductQty, subtracProductQty}) {
+    console.log(props,counter, addProductQty, subtracProductQty)
+
     return(
         <li className='bg-white shadow-md rounded-2xl text-center font-poppins font-light h-[95%]'>
             <img src={props.item.data.url} alt={props.item.data.Name} className='h-1/2 m-3 max-w-[80%] inline-grid' />
@@ -70,7 +81,7 @@ function ProductItem(props) {
                     <Icon color="#1B1A1A" size={8} icon="minus" className='mx-[6px]' />
                 </button>
                 <p className='mx-[8px]'>{counter}</p>
-                <button onClick={() =>addProductQty(props.item.id)} className='bg-[#B5D6B2] rounded-sm'>
+                <button onClick={() =>props.addProductQty(props.item.id)} className='bg-[#B5D6B2] rounded-sm'>
                     <Icon color="#1B1A1A" size={8} icon="plus" className='mx-[6px]' />
                 </button>
             </div>
@@ -110,7 +121,7 @@ function Products() {
     );
 }
 
-function Order() {
+/*function Order(props) {
     return(
         <div className='bg-[#B5D6B2] shadow-md rounded-2xl h-[93vh] mt-5 font-poppins font-normal fixed w-[28vw]'>
             <div className='bg-[#FAFAFA] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%]'>
@@ -128,6 +139,16 @@ function Order() {
             </div>
             <hr className='w-[90%] mx-[5%]' />
             <div>Ordered items go here</div>
+            <div className='ordersContainer'>
+                <div>
+                    <p>{props.data.quantity}</p>
+                    <p>{props.data.name}</p>
+                    <Icon color="#1B1A1A" size={26} icon="bin" className='mx-[1.8vw]'/>
+                </div>
+                <div>
+                    <p>{props.data.price}</p>
+                </div> 
+            </div>
             <hr className='w-[90%] mx-[5%]' />
             <div className='bg-[#FFBF69] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%] grid grid-flow-col justify-between'>
                 <p>Total:</p>
@@ -141,8 +162,8 @@ function Order() {
             </div>
         </div>
     );
-}
+}*/
 
 
 
-export { WaiterView, Products, Order};
+export { WaiterView, Products, ChangeProductQty, ProductItem};
