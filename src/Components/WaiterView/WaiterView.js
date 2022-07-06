@@ -6,21 +6,42 @@ import { getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { OrderInvoice } from './OrderInvoice'
 
+
+
+
 const addProductQty = (props,id) => {
-    console.log('add props', props)
     console.log(props,id);
     getItemsById(id).then((orderedItems) => {
         console.log(orderedItems);
-
+        const foundItem = props.props.productSelected.find((item) =>item.id === id);
+        console.log(foundItem);
+        if (foundItem === undefined) {
+            orderedItems.data.Count =0;
+            props.props.setProductSelected([...props.props.productSelected, {...orderedItems}]);
+            props.props.setCounter(orderedItems.data.Count);
+        } else {
+            let addToCount = props.productSelected[0];
+            addToCount.data.Count = addToCount.data.Count + 1;
+            props.props.setProductSelected([...props.props.productSelected]);
+            props.props.setCounter(addToCount.data.Count);
+        }
     })
     .catch((err) => {console.log(err.message)});
 }
 const subtracProductQty = (props,id) => {
-    console.log('props', props)
     getItemsById(id).then((orderedItems) => {
-        console.log(orderedItems);
-
-
+        const foundItem = props.productSelected.find((item) =>item.id === id);
+        if (foundItem === undefined) {
+            orderedItems.data.Count =  0;
+            props.props.setProductSelected([...props.props.productSelected, {...orderedItems}]);
+            props.setCounter(orderedItems.data.Count);
+        } else {
+            let addToCount = props.props.productSelected[0];
+            addToCount.data.Count --;
+            if (addToCount.data.Count < 0) addToCount.data.Count = 0;
+            props.props.setProductSelected([...props.props.productSelected]);
+            props.props.setCounter(addToCount.data.Count);
+        }
     })
     .catch((err) => {console.log(err.message)});
 }
@@ -113,6 +134,49 @@ function WaiterView() {
         </div>
     );
 }
+
+/*function Order(props) {
+    return(
+        <div className='bg-[#B5D6B2] shadow-md rounded-2xl h-[93vh] mt-5 font-poppins font-normal fixed w-[28vw]'>
+            <div className='bg-[#FAFAFA] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%]'>
+                Waiter: {waiter}
+            </div>
+            <div className='bg-[#FAFAFA] shadow-md rounded-2xl mx-[1vw] mb-[2vh] px-[6%] py-[1%]'>
+                <label>Table:</label>
+                <select name="select" className='bg-[#FAFAFA]'>
+                    <option value="table1">1</option>
+                    <option value="table2">2</option>
+                    <option value="table3">3</option>
+                    <option value="table4">4</option>
+                    <option value="table5">5</option>
+                </select>
+            </div>
+            <hr className='w-[90%] mx-[5%]' />
+            <div>Ordered items go here</div>
+            <div className='ordersContainer'>
+                <div>
+                    <p>{props.data.quantity}</p>
+                    <p>{props.data.name}</p>
+                    <Icon color="#1B1A1A" size={26} icon="bin" className='mx-[1.8vw]'/>
+                </div>
+                <div>
+                    <p>{props.data.price}</p>
+                </div> 
+            </div>
+            <hr className='w-[90%] mx-[5%]' />
+            <div className='bg-[#FFBF69] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%] grid grid-flow-col justify-between'>
+                <p>Total:</p>
+                <p>{total}</p>
+            </div>
+            <div>
+                <Icon color="#1B1A1A" size={26} icon="bin" className='mx-[1.8vw]' />
+                <button className='font-medium bg-[#1B1A1A] text-white shadow-md rounded-2xl px-[6%] py-[1%] w-[20vw]'>
+                    Send order
+                </button>
+            </div>
+        </div>
+    );
+}*/
 
 
 
