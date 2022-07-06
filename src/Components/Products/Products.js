@@ -33,8 +33,8 @@ function Products(props) {
                     <ProductItem
                         key={item.id}
                         item={item}
-                        productSelected={props.productSelected} 
-                        setProductSelected={props.setProductSelected}
+                        selected={props.selected} 
+                        setSelected={props.setSelected}
                         counter={props.counter}
                         setCounter={props.setCounter}
                     /> 

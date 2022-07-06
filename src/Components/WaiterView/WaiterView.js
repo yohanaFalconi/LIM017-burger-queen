@@ -9,17 +9,17 @@ const addProductQty = (props,id) => {
     console.log('props',props,'id',id);
     getItemsById(id).then((orderedItems) => {
         console.log('orderedItems',orderedItems);
-        const foundItem = props.props.productSelected.find((item) =>item.id === id);
+        const foundItem = props.props.selected.find((item) =>item.id === id);
         console.log('foundItem',foundItem);
         if (foundItem === undefined) {
             orderedItems.data.Count =0;
-            props.props.setProductSelected([...props.props.productSelected, {...orderedItems}]);
+            props.props.setSelected([...props.props.selected, {...orderedItems}]);
             props.props.setCounter(orderedItems.data.Count);
             console.log('foundItem again',foundItem);
         } else {
-            let addToCount = props.productSelected[0];
+            let addToCount = props.selected[0];
             addToCount.data.Count = addToCount.data.Count + 1;
-            props.props.setProductSelected([...props.props.productSelected]);
+            props.props.setSelected([...props.props.selected]);
             props.props.setCounter(addToCount.data.Count);
         }
     })
@@ -30,13 +30,13 @@ const subtracProductQty = (props,id) => {
         const foundItem = props.productSelected.find((item) =>item.id === id);
         if (foundItem === undefined) {
             orderedItems.data.Count =  0;
-            props.props.setProductSelected([...props.props.productSelected, {...orderedItems}]);
+            props.props.setSelected([...props.props.productSelected, {...orderedItems}]);
             props.setCounter(orderedItems.data.Count);
         } else {
             let addToCount = props.props.productSelected[0];
             addToCount.data.Count --;
             if (addToCount.data.Count < 0) addToCount.data.Count = 0;
-            props.props.setProductSelected([...props.props.productSelected]);
+            props.props.setSelected([...props.props.productSelected]);
             props.props.setCounter(addToCount.data.Count);
         }
     })
@@ -44,25 +44,24 @@ const subtracProductQty = (props,id) => {
 }
 
 function WaiterView() {
-    const [ productSelected, setProductSelected ] = useState([]);
+    const [ selected, setSelected ] = useState([]);
     const [ counter, setCounter] = useState(0);
-    console.log('counter from wv' ,counter)
-    // console.log('consoleando en id', id)
+    console.log('counter from wv', counter)
     return (
         <div className='bg-[#FAFAFA] WaiterView'>
             <main className='main'>
                 <img src={bqlogo} alt='Burger Queen' className='h-24 ml-4 mt-3' />
                 <Products
-                productSelected={productSelected} 
-                setProductSelected={setProductSelected}
+                selected={selected} 
+                setSelected={setSelected}
                 counter={counter}
                 setCounter={setCounter} 
                 />
             </main>
             <aside className='aside'>
                 <OrderInvoice 
-                productSelected={productSelected} 
-                setProductSelected={setProductSelected}
+                selected={selected} 
+                setSelected={setSelected}
                 counter={counter}
                 setCounter={setCounter}
                 />

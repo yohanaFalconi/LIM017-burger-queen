@@ -5,7 +5,6 @@ import {
 } from '../WaiterView/WaiterView.js'
 
 export default function ProductItem(props) {
-    console.log(props);
     return(
         <li className='bg-white shadow-md rounded-2xl text-center font-poppins font-light h-[95%]'>
             <img src={props.item.data.url} alt={props.item.data.Name} className='h-1/2 m-3 max-w-[80%] inline-grid' />
