@@ -7,24 +7,23 @@ import Products from '../Products/Products'
 
 const addProductQty = (props,id) => {
     const selected = props.selected;
-    if (selected.length === 0) {
+    const found = selected.some((product) => product.id === id);
+    console.log('selected found', found);
+    if (!found) {
         props.item.data.Count = 1;
         props.setSelected([...selected, props.item]);
         //console.log('selected vacio', props.selected);
+    } else {
+        props.item.data.Count = props.item.data.Count +1 ;
+        props.setSelected([...selected]);
+        console.log('selected', props.selected);
     } 
-    selected.forEach( product => {
-        if (product.id === id) {
-            props.item.data.Count = props.item.data.Count +1 ;
-            props.setSelected([...selected]);
-            console.log('selected', props.selected);
-        }
-    });
+
 }
 const subtracProductQty = (props,id) => {
     const selected = props.selected;
-    if (selected.length === 0 && props.item.data.Count < 0 ) {
-        props.item.data.Count = 0;
-        props.setSelected([...selected, props.item]);
+    if (selected.length === 0) {
+        return 
         // console.log('selected vacio', props.selected);
     } 
     selected.forEach( product => {
@@ -32,7 +31,7 @@ const subtracProductQty = (props,id) => {
             if (props.item.data.Count < 0) props.item.data.Count = 0;
             props.item.data.Count = props.item.data.Count -1 ;
             props.setSelected([...selected]);
-            console.log('selected', props.selected);
+            //console.log('selected', props.selected);
         }
     });
 }
@@ -54,7 +53,7 @@ function WaiterView() {
                 selected={selected} 
                 setSelected={setSelected}
                 />
-            </aside>
+            </aside> 
         </div>
     );
 }
