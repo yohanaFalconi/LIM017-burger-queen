@@ -5,24 +5,3 @@
 * {
     box-sizing: border-box;
 }
-
-.routes {
-    display: grid;
-    height: 100vh;
-    grid-auto-flow: column;
-    justify-content: space-evenly;
-    align-content: center;
-}
-
-.WaiterView {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.main {
-    width: 69vw;
-}
-
-.aside {
-    width: 28vw;
-}

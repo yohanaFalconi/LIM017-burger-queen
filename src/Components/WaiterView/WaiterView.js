@@ -1,9 +1,7 @@
 import './WaiterView.css';
 import bqlogo from '../../assets/bqlogo.png';
 import { getItemsById } from '../../firebase-utils';
-import { useState } from 'react';
-import { OrderInvoice } from '../OrderInvoice/OrderInvoice';
-import Products from '../Products/Products'
+import { Link } from 'react-router-dom';
 
 const addProductQty = (props,id) => {
     console.log('props',props,'id',id);
@@ -44,29 +42,27 @@ const subtracProductQty = (props,id) => {
 }
 
 function WaiterView() {
-    const [ selected, setSelected ] = useState([]);
-    const [ counter, setCounter] = useState(0);
-    console.log('counter from wv', counter)
     return (
-        <div className='bg-[#FAFAFA] WaiterView'>
-            <main className='main'>
-                <img src={bqlogo} alt='Burger Queen' className='h-24 ml-4 mt-3' />
-                <Products
-                selected={selected} 
-                setSelected={setSelected}
-                counter={counter}
-                setCounter={setCounter} 
-                />
-            </main>
-            <aside className='aside'>
-                <OrderInvoice 
-                selected={selected} 
-                setSelected={setSelected}
-                counter={counter}
-                setCounter={setCounter}
-                />
-            </aside>
-        </div>
+        <header className='grid grid-flow-col fixed top-0 w-[100vw] bg-[#FAFAFA]'>
+            <Link to='/navigate'>
+                <img src={bqlogo} alt='Burger Queen' className='h-[13vh] p-2 ml-3' />
+            </Link>
+            <nav className='self-center mr-4 flex justify-evenly'>
+                <button className='font-medium bg-[#FFBF69] text-black shadow-md rounded-2xl px-[6%] py-[1%]'>
+                    <Link to='/waiter-view/place-orders'>
+                        Place orders
+                    </Link>
+                </button>
+                <button className='font-medium bg-[#FFBF69] text-black shadow-md rounded-2xl px-[6%] py-[1%] mx-3'>
+                    <Link to='/waiter-view/ready-to-serve'>
+                        See ready to serve
+                    </Link>
+                </button>
+                <button className='font-medium bg-[#1B1A1A] text-white shadow-md rounded-2xl px-[6%] py-[1%]'>
+                    Log out
+                </button>
+            </nav>
+        </header>
     );
 }
 
