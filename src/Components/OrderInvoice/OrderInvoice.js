@@ -4,7 +4,7 @@ const waiter = 'Megan';
 let totalNumber = 0
 let total = '$' + totalNumber;
 
-export function OrderInvoice() {
+function OrderInvoice(props) {
     return(
         <div className='bg-[#B5D6B2] shadow-md rounded-2xl h-[93vh] mt-5 font-poppins font-normal fixed w-[28vw]'>
             <div className='bg-[#FAFAFA] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%]'>
@@ -22,7 +22,6 @@ export function OrderInvoice() {
             </div>
             <hr className='w-[90%] mx-[5%]' />
             <div>Ordered items go here</div>
-
             
             <hr className='w-[90%] mx-[5%]' />
             <div className='bg-[#FFBF69] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%] grid grid-flow-col justify-between'>
@@ -38,3 +37,5 @@ export function OrderInvoice() {
         </div>
     );
 }
+
+export default OrderInvoice;

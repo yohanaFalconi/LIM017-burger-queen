@@ -4,6 +4,7 @@ import {
     subtracProductQty
 } from '../WaiterView/WaiterView.js'
 
+
 export default function ProductItem(props) {
     return(
         <li className='bg-white shadow-md rounded-2xl text-center font-poppins font-light h-[95%]'>
@@ -14,7 +15,7 @@ export default function ProductItem(props) {
                 <button onClick={()=>subtracProductQty(props,props.item.id)} className='bg-[#B5D6B2] rounded-sm'>
                     <Icon color="#1B1A1A" size={8} icon="minus" className='mx-[6px]' />
                 </button>
-                <p className='mx-[8px]'>{props.counter}</p>
+                <p className='mx-[8px]'>{props.item.data.Count}</p>
                 <button onClick={()=>addProductQty(props,props.item.id)} className='bg-[#B5D6B2] rounded-sm'>
                     <Icon color="#1B1A1A" size={8} icon="plus" className='mx-[6px]' />
                 </button>
