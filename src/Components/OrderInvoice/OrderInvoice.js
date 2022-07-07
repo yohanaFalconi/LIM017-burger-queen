@@ -1,10 +1,12 @@
 import Icon from "../../IcoMoon/Icon";
-
+import CartItems from "../CartItems/CartItems"
 const waiter = 'Megan';
 let totalNumber = 0
 let total = '$' + totalNumber;
 
+
 function OrderInvoice(props) {
+    const selected = props.selected;
     return(
         <div className='bg-[#B5D6B2] shadow-md rounded-2xl h-[93vh] mt-5 font-poppins font-normal fixed w-[28vw]'>
             <div className='bg-[#FAFAFA] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%]'>
@@ -22,7 +24,15 @@ function OrderInvoice(props) {
             </div>
             <hr className='w-[90%] mx-[5%]' />
             <div>Ordered items go here</div>
-            
+            {/*<div>{selected.map(item => console.log('item',item))}</div>*/}
+            <div className="w-48 h-20 bg-indigo-500">
+                <div>
+                    <p>Cantidad</p>
+                    <p>Nombre</p>
+                    <p>Delete</p>
+                </div>
+            </div>
+
             <hr className='w-[90%] mx-[5%]' />
             <div className='bg-[#FFBF69] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%] grid grid-flow-col justify-between'>
                 <p>Total:</p>
