@@ -17,7 +17,7 @@ class App extends Component {
             <Route exact path="/waiter-view" element={<PlaceOrders />} />
             <Route exact path="/chef-view" element={<ChefView />} />
             <Route exact path="/waiter-view/place-orders" element={<PlaceOrders />} />
-            <Route exact path="/waiter-view/see-ready-to-serve" element={<WaiterView />} />
+            <Route exact path="/waiter-view/ready-to-serve" element={<WaiterView />} />
           </Routes>
       </BrowserRouter>
     );

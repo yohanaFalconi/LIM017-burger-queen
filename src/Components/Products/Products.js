@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import ProductItem from '../ProductItem/ProductItem';
 
 function Products(props) {
-    console.log('counter from products' , props.counter)
+    // console.log('counter from products' , props.counter)
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState([]);
     useEffect(() => {
