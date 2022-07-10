@@ -4,9 +4,9 @@ const waiter = 'Megan';
 let totalNumber = 0
 let total = '$' + totalNumber;
 
-function OrderInvoice(props) {
+export default function OrderInvoice() {
     return(
-        <div className='bg-[#B5D6B2] shadow-md rounded-2xl h-[93vh] mt-5 font-poppins font-normal fixed w-[28vw]'>
+        <div className='bg-[#B5D6B2] shadow-md rounded-2xl h-[80vh] mt-5 font-poppins font-normal flex flex-col fixed'>
             <div className='bg-[#FAFAFA] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%]'>
                 Waiter: {waiter}
             </div>
@@ -29,13 +29,11 @@ function OrderInvoice(props) {
                 <p>{total}</p>
             </div>
             <div>
-                <Icon color="#1B1A1A" size={26} icon="bin" className='mx-[1.8vw]' />
-                <button className='font-medium bg-[#1B1A1A] text-white shadow-md rounded-2xl px-[6%] py-[1%] w-[20vw]'>
+                <Icon color="#1B1A1A" size={26} icon="bin" className='mx-[1.5vw]' />
+                <button className='font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%] w-[20vw] mr-3'>
                     Send order
                 </button>
             </div>
         </div>
     );
 }
-
-export default OrderInvoice;

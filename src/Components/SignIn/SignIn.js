@@ -1,4 +1,3 @@
-// import { Link } from 'react-router-dom';
 import './SignIn.css';
 import { auth } from '../../firebase-config';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -19,7 +18,7 @@ function SignIn() {
 
     return (
         <div className="SignIn burgerBg h-screen">
-            <div className="grid place-content-center ">
+            <div className="grid place-content-center">
                 <img className="w-[450px] mt-[26vh] mb-[5vh]" src={logo} alt="bqlogo" />
             </div>
             <div className='flex justify-center'>
