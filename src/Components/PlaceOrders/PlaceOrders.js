@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import OrderInvoice from '../OrderInvoice/OrderInvoice';
 import Products from '../Products/Products';
-import { WaiterView } from '../WaiterNav/WaiterNav';
+import { WaiterNav } from '../WaiterNav/WaiterNav';
 import './PlaceOrders.css';
 
 export default function PlaceOrders() {
@@ -26,7 +26,7 @@ export default function PlaceOrders() {
 
     return (
         <div className='bg-[#FAFAFA] h-screen'>
-            <WaiterView />
+            <WaiterNav />
             <div className='container mt-[13vh]'>
                 <main>
                     <Products
