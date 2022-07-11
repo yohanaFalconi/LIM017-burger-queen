@@ -1,46 +1,40 @@
 import './WaiterView.css';
 import bqlogo from '../../assets/bqlogo.png';
-import { getItemsById } from '../../firebase-utils';
+// import { getItemsById } from '../../firebase-utils';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const addProductQty = (props,id) => {
-    console.log('props',props,'id',id);
-    getItemsById(id).then((orderedItems) => {
-        console.log('orderedItems',orderedItems);
-        const foundItem = props.props.selected.find((item) =>item.id === id);
-        console.log('foundItem',foundItem);
-        if (foundItem === undefined) {
-            orderedItems.data.Count =0;
-            props.props.setSelected([...props.props.selected, {...orderedItems}]);
-            props.props.setCounter(orderedItems.data.Count);
-            console.log('foundItem again',foundItem);
-        } else {
-            let addToCount = props.selected[0];
-            addToCount.data.Count = addToCount.data.Count + 1;
-            props.props.setSelected([...props.props.selected]);
-            props.props.setCounter(addToCount.data.Count);
+    const selected = props.selected;
+    if (selected.length === 0) {
+        props.item.data.Count = 1;
+        props.setSelected([...selected, props.item]);
+        //console.log('selected vacio', props.selected);
+    } 
+    selected.forEach( product => {
+        if (product.id === id) {
+            props.item.data.Count = props.item.data.Count +1 ;
+            props.setSelected([...selected]);
+            console.log('selected', props.selected);
         }
-    })
-    .catch(err => console.log(err.message));
+    });
 }
 const subtracProductQty = (props,id) => {
-    getItemsById(id).then((orderedItems) => {
-        const foundItem = props.productSelected.find((item) =>item.id === id);
-        if (foundItem === undefined) {
-            orderedItems.data.Count =  0;
-            props.props.setSelected([...props.props.productSelected, {...orderedItems}]);
-            props.setCounter(orderedItems.data.Count);
-        } else {
-            let addToCount = props.props.productSelected[0];
-            addToCount.data.Count --;
-            if (addToCount.data.Count < 0) addToCount.data.Count = 0;
-            props.props.setSelected([...props.props.productSelected]);
-            props.props.setCounter(addToCount.data.Count);
+    const selected = props.selected;
+    if (selected.length === 0 && props.item.data.Count < 0 ) {
+        props.item.data.Count = 0;
+        props.setSelected([...selected, props.item]);
+        // console.log('selected vacio', props.selected);
+    } 
+    selected.forEach( product => {
+        if (product.id === id) {
+            if (props.item.data.Count < 0) props.item.data.Count = 0;
+            props.item.data.Count = props.item.data.Count -1 ;
+            props.setSelected([...selected]);
+            console.log('selected', props.selected);
         }
-    })
-    .catch(err => console.log(err.message));
+    });
 }
 
 function WaiterView() {
@@ -54,12 +48,12 @@ function WaiterView() {
     useEffect(() => {
         console.log('location has been changed to:', location);
         switch (location) {
-            case 'waiter-view/place-orders':
+            case '/waiter-view/place-orders':
                 console.log('help');
                 setPlaceOrdersState('active');
                 setReadyServeState('inactive');
                 break;
-            case 'waiter-view/ready-to-serve':
+            case '/waiter-view/ready-to-serve':
                 console.log('ayuda');
                 setPlaceOrdersState('inactive');
                 setReadyServeState('active');
@@ -68,22 +62,7 @@ function WaiterView() {
                 console.log('something');
                 break;
         }
-        /* if (location === 'waiter-view/place-orders') {
-            console.log('help');
-            setPlaceOrdersState('active');
-            setReadyServeState('inactive');
-        } else if (location === 'waiter-view/ready-to-serve') {
-            console.log('ayuda');
-            setPlaceOrdersState('inactive');
-            setReadyServeState('active');
-        } else {
-            console.log('something');
-        } */
     }, [location])
-
-    // cada botón va a tener su estado, que va a ser llamado en un data attribute
-    // y estilado en el css
-    // change the state on useEffect
 
     return (
         <header className='grid grid-flow-col fixed top-0 w-[100vw] bg-[#FAFAFA]'>
