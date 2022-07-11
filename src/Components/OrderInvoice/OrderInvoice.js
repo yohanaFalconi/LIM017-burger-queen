@@ -1,14 +1,11 @@
 import Icon from "../../IcoMoon/Icon";
 import CartItems from "../CartItems/CartItems"
 const waiter = 'Megan';
-let totalNumber = 0
-let total = '$' + totalNumber;
+//let total = '$' + totalNumber;
 
-
-function OrderInvoice(props) {
-    const selected = props.selected;
+export default function OrderInvoice(props) {
     return(
-        <div className='bg-[#B5D6B2] shadow-md rounded-2xl h-[93vh] mt-5 font-poppins font-normal fixed w-[28vw]'>
+        <div className='bg-[#B5D6B2] shadow-md rounded-2xl h-[80vh] mt-5 font-poppins font-normal flex flex-col fixed'>
             <div className='bg-[#FAFAFA] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%]'>
                 Waiter: {waiter}
             </div>
@@ -23,29 +20,22 @@ function OrderInvoice(props) {
                 </select>
             </div>
             <hr className='w-[90%] mx-[5%]' />
-            <div>Ordered items go here</div>
-            {/*<div>{selected.map(item => console.log('item',item))}</div>*/}
-            <div className="w-48 h-20 bg-indigo-500">
-                <div>
-                    <p>Cantidad</p>
-                    <p>Nombre</p>
-                    <p>Delete</p>
-                </div>
-            </div>
-
+            <CartItems 
+                key={props.id}
+                selected={props.selected} 
+                setSelected={props.setSelected} 
+            />
             <hr className='w-[90%] mx-[5%]' />
             <div className='bg-[#FFBF69] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%] grid grid-flow-col justify-between'>
                 <p>Total:</p>
-                <p>{total}</p>
+                <p>${props.total}</p>
             </div>
             <div>
-                <Icon color="#1B1A1A" size={26} icon="bin" className='mx-[1.8vw]' />
-                <button className='font-medium bg-[#1B1A1A] text-white shadow-md rounded-2xl px-[6%] py-[1%] w-[20vw]'>
+                <Icon color="#1B1A1A" size={26} icon="bin" className='mx-[1.5vw]' />
+                <button className='font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%] w-[20vw] mr-3'>
                     Send order
                 </button>
             </div>
         </div>
     );
 }
-
-export default OrderInvoice;
