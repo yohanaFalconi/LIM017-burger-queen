@@ -11,7 +11,8 @@ function SignIn() {
     const handleGoogleSingin = () => {
         const provider = new GoogleAuthProvider();
         return (signInWithPopup(auth, provider)
-        .then(() => {
+        .then((result) => {
+            console.log('user', result.user.displayName);
             nav('/navigate')})
         .catch((error) => {console.log(error)}));
     }
