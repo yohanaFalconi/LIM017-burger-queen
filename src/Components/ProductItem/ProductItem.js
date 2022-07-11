@@ -1,8 +1,8 @@
 import Icon from "../../IcoMoon/Icon";
 import {
     addProductQty,
-    subtracProductQty
-} from '../WaiterView/WaiterView.js'
+    subtractProductQty
+} from '../WaiterNav/WaiterNav.js'
 
 
 export default function ProductItem(props) {
@@ -13,7 +13,7 @@ export default function ProductItem(props) {
             <h4>{props.item.data.Name}</h4>
             <p>${props.item.data.Price}</p>
             <div className='flex justify-center my-[10px]'>
-                <button onClick={()=>subtracProductQty(props,props.item.id)} className='bg-[#B5D6B2] rounded-sm'>
+                <button onClick={()=>subtractProductQty(props,props.item.id)} className='bg-[#B5D6B2] rounded-sm'>
                     <Icon color="#1B1A1A" size={8} icon="minus" className='mx-[6px]' />
                 </button>
                 <p className='mx-[8px]'>{props.item.data.Count}</p>
