@@ -1,44 +1,53 @@
-import './WaiterView.css';
+import './WaiterNav.css';
 import bqlogo from '../../assets/bqlogo.png';
-// import { getItemsById } from '../../firebase-utils';
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom'
 
-const addProductQty = (props,id) => {
+
+const addProductQty = (props, id) => { 
     const selected = props.selected;
-    if (selected.length === 0) {
+    const found = selected.some((product) => product.id === id);
+
+    if (!found) {
         props.item.data.Count = 1;
+        props.item.data.Total = props.item.data.Price;
         props.setSelected([...selected, props.item]);
-        //console.log('selected vacio', props.selected);
-    } 
-    selected.forEach( product => {
-        if (product.id === id) {
-            props.item.data.Count = props.item.data.Count +1 ;
-            props.setSelected([...selected]);
-            console.log('selected', props.selected);
-        }
-    });
-}
-const subtracProductQty = (props,id) => {
-    const selected = props.selected;
-    if (selected.length === 0 && props.item.data.Count < 0 ) {
-        props.item.data.Count = 0;
-        props.setSelected([...selected, props.item]);
-        // console.log('selected vacio', props.selected);
-    } 
-    selected.forEach( product => {
-        if (product.id === id) {
-            if (props.item.data.Count < 0) props.item.data.Count = 0;
-            props.item.data.Count = props.item.data.Count -1 ;
-            props.setSelected([...selected]);
-            console.log('selected', props.selected);
-        }
-    });
+    } else {
+        props.item.data.Count = props.item.data.Count + 1;
+        props.item.data.Total = props.item.data.Count * props.item.data.Price;        
+        props.setSelected([...selected]);
+
+
+    }    
 }
 
-function WaiterView() {
+const subtractProductQty = (props, id) => {
+    const selected = props.selected;
+
+    // reduce solo funciona si el array de selected está lleno >0, como ya le dieron click a + entonces contiene algo
+    // 'acum' acumula todo en un ARRAY VACÍO 
+    //"element" es el currentValue xq captura el actual producto al cuál le damos click 
+    const nuevoProduct = selected.reduce((acum, element) => {
+        // validamos los id al que le damos click (esto hace lo mismo que found)
+        // Si los id´s son iguales que reste -1
+        if (element.id === id) {
+            element.data.Count = element.data.Count - 1;
+            props.item.data.Total = props.item.data.Count * props.item.data.Price; // esto es para la función total
+        }
+        //Aún el acumulador está vacío, por eso le diremos que si contiene algún elemento (osea, >0) que lo acumule
+        // push() agregará los "elements" al ARRAY VACÍO que tenemos (osea, acum)
+        if (element.data.Count > 0) {
+            acum.push(element)
+        };
+        // filtrar no funciona
+        //const filtered = acum.filter((product) => product.data.Count > 0);
+        //return filtered;
+        return acum;
+    }, []);
+    props.setSelected(nuevoProduct)
+}
     
+function WaiterNav() {
     const [placeOrdersState, setPlaceOrdersState] = useState('inactive');
     const [readyServeState, setReadyServeState] = useState('inactive');
 
@@ -48,12 +57,12 @@ function WaiterView() {
     useEffect(() => {
         console.log('location has been changed to:', location);
         switch (location) {
-            case 'waiter-view/place-orders':
+            case '/waiter-view/place-orders':
                 console.log('help');
                 setPlaceOrdersState('active');
                 setReadyServeState('inactive');
                 break;
-            case 'waiter-view/ready-to-serve':
+            case '/waiter-view/ready-to-serve':
                 console.log('ayuda');
                 setPlaceOrdersState('inactive');
                 setReadyServeState('active');
@@ -62,22 +71,7 @@ function WaiterView() {
                 console.log('something');
                 break;
         }
-        /* if (location === 'waiter-view/place-orders') {
-            console.log('help');
-            setPlaceOrdersState('active');
-            setReadyServeState('inactive');
-        } else if (location === 'waiter-view/ready-to-serve') {
-            console.log('ayuda');
-            setPlaceOrdersState('inactive');
-            setReadyServeState('active');
-        } else {
-            console.log('something');
-        } */
     }, [location])
-
-    // cada botón va a tener su estado, que va a ser llamado en un data attribute
-    // y estilado en el css
-    // change the state on useEffect
 
     return (
         <header className='grid grid-flow-col fixed top-0 w-[100vw] bg-[#FAFAFA]'>
@@ -103,4 +97,4 @@ function WaiterView() {
     );
 };
 
-export { WaiterView, addProductQty, subtracProductQty };
+export { WaiterNav, addProductQty, subtractProductQty};
