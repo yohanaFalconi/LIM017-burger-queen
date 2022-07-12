@@ -52,23 +52,18 @@ function WaiterNav() {
     const [readyServeState, setReadyServeState] = useState('inactive');
 
     let location = useLocation().pathname;
-    console.log(useLocation());
 
     useEffect(() => {
-        console.log('location has been changed to:', location);
         switch (location) {
             case '/waiter-view/place-orders':
-                console.log('help');
                 setPlaceOrdersState('active');
                 setReadyServeState('inactive');
                 break;
             case '/waiter-view/ready-to-serve':
-                console.log('ayuda');
                 setPlaceOrdersState('inactive');
                 setReadyServeState('active');
                 break;
             default:
-                console.log('something');
                 break;
         }
     }, [location])
