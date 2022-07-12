@@ -1,4 +1,6 @@
 import Icon from "../../IcoMoon/Icon";
+import { useEffect } from 'react';
+
 import {
     addProductQty,
     subtractProductQty
@@ -17,6 +19,8 @@ export default function ProductItem(props) {
                     <Icon color="#1B1A1A" size={8} icon="minus" className='mx-[6px]' />
                 </button>
                 <p className='mx-[8px]'>{props.item.data.Count}</p>
+                <p className='mx-[8px]'>{props.counter}</p>
+
                 <button onClick={()=>addProductQty(props,props.item.id)} className='bg-[#B5D6B2] rounded-sm'>
                     <Icon color="#1B1A1A" size={8} icon="plus" className='mx-[6px]' />
                 </button>

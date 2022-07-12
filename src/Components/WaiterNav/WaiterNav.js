@@ -9,14 +9,14 @@ const addProductQty = (props, id) => {
     const found = selected.some((product) => product.id === id);
 
     if (!found) {
-        props.item.data.Count = 1;
+        //props.item.data.Count = 1;
+ 
         props.item.data.Total = props.item.data.Price;
         props.setSelected([...selected, props.item]);
     } else {
         props.item.data.Count = props.item.data.Count + 1;
         props.item.data.Total = props.item.data.Count * props.item.data.Price;        
         props.setSelected([...selected]);
-
 
     }    
 }
@@ -46,13 +46,15 @@ const subtractProductQty = (props, id) => {
     }, []);
     props.setSelected(nuevoProduct)
 }
+
+
     
 function WaiterNav() {
     const [placeOrdersState, setPlaceOrdersState] = useState('inactive');
     const [readyServeState, setReadyServeState] = useState('inactive');
 
     let location = useLocation().pathname;
-    console.log(useLocation());
+    //console.log(useLocation());
 
     useEffect(() => {
         console.log('location has been changed to:', location);
@@ -68,10 +70,12 @@ function WaiterNav() {
                 setReadyServeState('active');
                 break;
             default:
-                console.log('something');
+                //console.log('something');
                 break;
         }
     }, [location])
+
+    
 
     return (
         <header className='grid grid-flow-col fixed top-0 w-[100vw] bg-[#FAFAFA]'>

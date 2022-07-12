@@ -4,6 +4,7 @@ const waiter = 'Megan';
 //let total = '$' + totalNumber;
 
 export default function OrderInvoice(props) {
+
     return(
         <div className='bg-[#B5D6B2] shadow-md rounded-2xl h-[80vh] mt-5 font-poppins font-normal flex flex-col fixed'>
             <div className='bg-[#FAFAFA] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%]'>
@@ -28,10 +29,12 @@ export default function OrderInvoice(props) {
             <hr className='w-[90%] mx-[5%]' />
             <div className='bg-[#FFBF69] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%] grid grid-flow-col justify-between'>
                 <p>Total:</p>
-                <p>${props.total}</p>
+                <p>${props.updateTotal}</p>
             </div>
             <div>
-                <Icon color="#1B1A1A" size={26} icon="bin" className='mx-[1.5vw]' />
+                <button onClick={()=> props.setSelected([])}>
+                    <Icon color="#1B1A1A" size={26} icon="bin" className='mx-[1.5vw]' />
+                </button>
                 <button className='font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%] w-[20vw] mr-3'>
                     Send order
                 </button>

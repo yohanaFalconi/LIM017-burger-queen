@@ -1,28 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import OrderInvoice from '../OrderInvoice/OrderInvoice';
 import Products from '../Products/Products';
 import { WaiterNav } from '../WaiterNav/WaiterNav';
 import './PlaceOrders.css';
 
+
+
+
 export default function PlaceOrders() {
     const [ selected, setSelected ] = useState([]);
-    const [total, setTotal] = useState(0);
+    const [ counter, setCounter] = useState(0);
+    const [ updateTotal, setUpdateTotal] = useState(0);
+    
+    useEffect(() => {
+        const result = selected.reduce((acum , ele) => {
+            return acum + ele.data.Total;
+        }, 0)
+        setUpdateTotal(result)
+    },[selected]);
+    
+    /*useEffect(() => {
+        const result = selected.map((items) => {
+        
+            const cant = selected.find((el) => el.id === items.id)
+            //console.log('cant',cant)
+            if(cant !== undefined) {
+                //console.log('cant',cant.data.Count)
+                return cant.data.Count
+            }
+            return setCounter(cant)
+        }) 
+        
+        console.log('result', result)
+        setCounter(result)
+    },[selected]);*/
+    //props.setCounter(props.item.data.Count)
+    //console.log("selected", selected.data)
 
-    // estoy aun trabajando en la suma total
-    /*useEffect(() => updateTotalProduct(), []);
-    const updateTotalProduct = () => {
-
-        const c = [1,2,3,4,5,6,7]
-        const a = c.reduce((acum, ele) => {
-            //console.log('ele', ele.data.Total)
-            //const b =  ele.data.Total;
-            return acum + ele;
-        })
-        console.log('array',a)
-        setTotal(a)
-
-
-    };*/
 
     return (
         <div className='bg-[#FAFAFA] h-screen'>
@@ -32,6 +46,9 @@ export default function PlaceOrders() {
                     <Products
                     selected={selected} 
                     setSelected={setSelected}
+
+                    counter={counter}
+                    setCounter={setCounter}
                     />
                 </main>
                 <aside>
@@ -39,7 +56,9 @@ export default function PlaceOrders() {
                     selected={selected} 
                     setSelected={setSelected}
 
-                    total={total}
+                    updateTotal={updateTotal}
+                    setUpdateTotal={setUpdateTotal}
+
                     />
                 </aside>
             </div>
@@ -47,3 +66,4 @@ export default function PlaceOrders() {
         </div>
     );
 }
+

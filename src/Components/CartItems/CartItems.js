@@ -17,7 +17,8 @@ function CartItems (props) {
         /* El método splice() cambia el contenido de un array eliminando elementos
         existentes y/o agregando nuevos elementos. */
         selected.splice(index,1); // con index le decimos la posisición a eliminar y con 1 que solo elimine un elemento
-        setSelected([...selected])        
+        setSelected([...selected])
+        props.setCounter(0)        
     };
 
 
