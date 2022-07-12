@@ -35,7 +35,7 @@ export default function OrderInvoice(props) {
                 <button onClick={()=> props.setSelected([])}>
                     <Icon color="#1B1A1A" size={26} icon="bin" className='mx-[1.5vw]' />
                 </button>
-                <button className='font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%] w-[20vw] mr-3'>
+                <button  className='font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%] w-[20vw] mr-3'>
                     Send order
                 </button>
             </div>
