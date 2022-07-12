@@ -1,10 +1,9 @@
 import Icon from "../../IcoMoon/Icon";
-import { useEffect } from 'react';
-
+// import { useEffect } from 'react';
 import {
     addProductQty,
     subtractProductQty
-} from '../WaiterNav/WaiterNav.js'
+} from '../PlaceOrders/PlaceOrders'
 
 
 export default function ProductItem(props) {

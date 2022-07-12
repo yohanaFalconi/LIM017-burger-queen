@@ -2,10 +2,10 @@ import { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from './Components/SignIn/SignIn';
-import { WaiterNav } from './Components/WaiterNav/WaiterNav';
+import WaiterNav from './Components/WaiterNav/WaiterNav';
 import Navigate from './Components/Navigate/Navigate';
 import ChefView from './Components/ChefView/ChefView';
-import PlaceOrders from './Components/PlaceOrders/PlaceOrders';
+import { PlaceOrders } from './Components/PlaceOrders/PlaceOrders';
 
 class App extends Component {
   render() {
