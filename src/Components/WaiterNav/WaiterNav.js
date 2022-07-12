@@ -59,6 +59,10 @@ function WaiterNav() {
                 setPlaceOrdersState('active');
                 setReadyServeState('inactive');
                 break;
+            case '/waiter-view/':
+                setPlaceOrdersState('active');
+                setReadyServeState('inactive');
+                break;
             case '/waiter-view/ready-to-serve':
                 setPlaceOrdersState('inactive');
                 setReadyServeState('active');
