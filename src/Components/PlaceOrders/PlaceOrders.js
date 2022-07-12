@@ -4,7 +4,7 @@ import Products from '../Products/Products';
 import { WaiterNav } from '../WaiterNav/WaiterNav';
 import './PlaceOrders.css';
 
-export default function PlaceOrders() {
+export default function PlaceOrders(props) {
     const [ selected, setSelected ] = useState([]);
     const [total, setTotal] = useState(0);
 
@@ -38,7 +38,7 @@ export default function PlaceOrders() {
                     <OrderInvoice 
                     selected={selected} 
                     setSelected={setSelected}
-
+                    username={props.username}
                     total={total}
                     />
                 </aside>

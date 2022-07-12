@@ -1,13 +1,11 @@
 import Icon from "../../IcoMoon/Icon";
-import CartItems from "../CartItems/CartItems"
-const waiter = 'Megan';
-//let total = '$' + totalNumber;
+import CartItems from "../CartItems/CartItems";
 
 export default function OrderInvoice(props) {
     return(
         <div className='bg-[#B5D6B2] shadow-md rounded-2xl h-[80vh] mt-5 font-poppins font-normal flex flex-col fixed'>
             <div className='bg-[#FAFAFA] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%]'>
-                Waiter: {waiter}
+                Waiter: {props.username}
             </div>
             <div className='bg-[#FAFAFA] shadow-md rounded-2xl mx-[1vw] mb-[2vh] px-[6%] py-[1%]'>
                 <label>Table:</label>
