@@ -36,6 +36,7 @@ function Products(props) {
                         setSelected={props.setSelected}
                         counter={props.counter}
                         setCounter={props.setCounter}
+                        
                     /> 
                 )}
             </ul>
