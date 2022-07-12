@@ -34,7 +34,6 @@ function Products(props) {
                         item={item}
                         selected={props.selected} 
                         setSelected={props.setSelected}
-                        
                     /> 
                 )}
             </ul>

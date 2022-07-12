@@ -1,13 +1,13 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from './Components/SignIn/SignIn';
-import { WaiterNav } from './Components/WaiterNav/WaiterNav';
+import WaiterNav from './Components/WaiterNav/WaiterNav';
 import Navigate from './Components/Navigate/Navigate';
 import ChefView from './Components/ChefView/ChefView';
 import PlaceOrders from './Components/PlaceOrders/PlaceOrders';
 import { useState } from "react";
 
-function App() {
+export default function App() {
   
   const [username, setUsername] = useState();
 
@@ -24,5 +24,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;

@@ -1,5 +1,6 @@
 import Icon from "../../IcoMoon/Icon";
-import CartItems from "../CartItems/CartItems";
+import CartItems from "../CartItems/CartItems"
+import { deleteAllProducts } from "../../WaiterViewUtils";
 
 export default function OrderInvoice(props) {
     return(
@@ -25,7 +26,6 @@ export default function OrderInvoice(props) {
                     setSelected={props.setSelected} 
                 />
             </div>
-            
             <div className="fixed bottom-0 mb-[35px]">
                 <hr className='w-[90%] mx-[5%]' />
                 <div className='bg-[#FFBF69] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%] grid grid-flow-col justify-between'>
@@ -33,13 +33,14 @@ export default function OrderInvoice(props) {
                     <p>${props.total}</p>
                 </div>
                 <div>
-                    <Icon color="#1B1A1A" size={26} icon="bin" className='mx-[1.5vw]' />
+                    <button onClick={()=> deleteAllProducts(props.selected, props.setSelected)}>
+                        <Icon color="#1B1A1A" size={26} icon="bin" className='mx-[1.5vw]' />
+                    </button>
                     <button className='font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%] w-[20vw] mr-3'>
                         Send order
                     </button>
                 </div>
             </div>
-            
         </div>
     );
 }
