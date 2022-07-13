@@ -2,39 +2,31 @@ import './WaiterNav.css';
 import bqlogo from '../../assets/bqlogo.png';
 import { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom'
-
-
-
-
-
     
-function WaiterNav() {
+export default function WaiterNav() {
     const [placeOrdersState, setPlaceOrdersState] = useState('inactive');
     const [readyServeState, setReadyServeState] = useState('inactive');
 
     let location = useLocation().pathname;
-    //console.log(useLocation());
 
     useEffect(() => {
-        console.log('location has been changed to:', location);
         switch (location) {
             case '/waiter-view/place-orders':
-                console.log('help');
+                setPlaceOrdersState('active');
+                setReadyServeState('inactive');
+                break;
+            case '/waiter-view/':
                 setPlaceOrdersState('active');
                 setReadyServeState('inactive');
                 break;
             case '/waiter-view/ready-to-serve':
-                console.log('ayuda');
                 setPlaceOrdersState('inactive');
                 setReadyServeState('active');
                 break;
             default:
-                //console.log('something');
                 break;
         }
     }, [location])
-
-    
 
     return (
         <header className='grid grid-flow-col fixed top-0 w-[100vw] bg-[#FAFAFA]'>
@@ -59,5 +51,3 @@ function WaiterNav() {
         </header>
     );
 };
-
-export { WaiterNav};
