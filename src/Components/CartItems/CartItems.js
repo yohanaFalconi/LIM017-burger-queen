@@ -13,7 +13,7 @@ export default function CartItems (props) {
                     <div className="flex justify-around">
                         <p className="grow-0 px-1.5 py-1 ">({item.data.Count})</p>
                         <p className="grow px-1.5 py-1">{item.data.Name}</p>
-                        <button onClick={()=>deleteProduct(item, selected, setSelected)} className="grow-0">
+                        <button onClick={() => deleteProduct(item, selected, setSelected)} className="grow-0">
                             <Icon color="#1B1A1A" size={22} icon="bin" className='mx-[1vw]' />
                         </button>
                     </div>

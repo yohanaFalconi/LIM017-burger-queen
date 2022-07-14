@@ -22,7 +22,7 @@ export const subtractProduct = (props) => {
         // Si los id´s son iguales que reste -1
         if (element.id === id) {
             element.data.Count = element.data.Count - 1;
-            props.item.data.Total = props.item.data.Count * props.item.data.Price; // esto es para la función total
+            props.item.data.LocalTotal = props.item.data.Count * props.item.data.Price; // esto es para la función total
         }
         //Aún el acumulador está vacío, por eso le diremos que si contiene algún elemento (osea, >0) que lo acumule
         // push() agregará los "elements" al ARRAY VACÍO que tenemos (osea, acum)
