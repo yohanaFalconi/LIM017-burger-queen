@@ -58,3 +58,35 @@ export const deleteAllProducts = (selected, setSelected) => {
     });
     setSelected([]);
 }
+
+export const cancelBurger = (item, selected, setSelected) => {
+    const id = item.id;
+    const found = selected.some((product) => product.id === id);
+    if (found) {
+        deleteProduct(item, selected, setSelected);
+    } else {
+        return;
+    }
+}
+
+/* export const addBurger = (props) => {
+    const selected = props.selected;
+    const id = props.item.id;
+    const found = selected.some((product) => product.id === id);
+    if (!found) {
+        props.setSelected([...selected, props.item]);
+    } else {
+        props.setSelected([...selected]);
+    }
+    if (props.cheese) {
+        props.item.data.Price += 1;
+    }
+    if (props.egg) {
+        props.item.data.Price += 1;
+    }
+    if (props.double) {
+        props.item.data.Price += 3;
+    }
+    props.item.data.Count = props.item.data.Count + 1;
+    props.item.data.LocalTotal = props.item.data.Count * props.item.data.Price;
+} */
