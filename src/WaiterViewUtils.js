@@ -1,4 +1,4 @@
-export const addProduct = (props) => {
+export const addProduct = (props, burgerPrice) => {
     const selected = props.selected;
     const id = props.item.id;
     const found = selected.some((product) => product.id === id);
@@ -8,7 +8,11 @@ export const addProduct = (props) => {
         props.setSelected([...selected]);
     }
     props.item.data.Count = props.item.data.Count + 1;
-    props.item.data.LocalTotal = props.item.data.Count * props.item.data.Price;
+    if (props.item.data.Type === 'Burger') {
+        props.item.data.LocalTotal = props.item.data.Count * burgerPrice;
+    } else {
+        props.item.data.LocalTotal = props.item.data.Count * props.item.data.Price;
+    }
 }
 
 export const subtractProduct = (props) => {
@@ -69,24 +73,35 @@ export const cancelBurger = (item, selected, setSelected) => {
     }
 }
 
-/* export const addBurger = (props) => {
-    const selected = props.selected;
-    const id = props.item.id;
-    const found = selected.some((product) => product.id === id);
-    if (!found) {
-        props.setSelected([...selected, props.item]);
+export const handleExtras = (cheese, setCheese, egg, setEgg, double, setDouble, priceWithExtras, setPriceWithExtras, clicked) => {
+    if (clicked === 'clickedCheese') {
+        if (!cheese) {
+            setCheese(true);
+            setPriceWithExtras(priceWithExtras + 1);
+        } else if (cheese) {
+            setCheese(false);
+            setPriceWithExtras(priceWithExtras - 1);
+        }
+    } else if (clicked === 'clickedEgg') {
+        if (!egg) {
+            setEgg(true);
+            setPriceWithExtras(priceWithExtras + 1);
+        } else if (egg) {
+            setEgg(false);
+            setPriceWithExtras(priceWithExtras - 1);
+        }
     } else {
-        props.setSelected([...selected]);
+        if (!double) {
+            setDouble(true);
+            setPriceWithExtras(priceWithExtras + 3);
+        } else if (double) {
+            setDouble(false);
+            setPriceWithExtras(priceWithExtras - 3);
+        }
     }
-    if (props.cheese) {
-        props.item.data.Price += 1;
-    }
-    if (props.egg) {
-        props.item.data.Price += 1;
-    }
-    if (props.double) {
-        props.item.data.Price += 3;
-    }
-    props.item.data.Count = props.item.data.Count + 1;
-    props.item.data.LocalTotal = props.item.data.Count * props.item.data.Price;
-} */
+}
+
+// messages for tomorrow Megan
+// go to firestore and create a new property (CustomPrice)
+    // that's how you can reset the price, you just = it to Price
+//cancel button should reset the price now too
