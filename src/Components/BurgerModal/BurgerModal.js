@@ -1,7 +1,7 @@
 import './BurgerModal.css';
 import { useState } from "react";
 import Icon from "../../IcoMoon/Icon";
-import { addProduct, cancelBurger, handleExtras, subtractProduct } from '../../WaiterViewUtils.js';
+import { addProduct, cancelBurger, handleExtras, saveBurger, subtractProduct } from '../../WaiterViewUtils.js';
 
 export default function BurgerModal(props) {
     const [cheese, setCheese] = useState(false);
@@ -58,7 +58,10 @@ export default function BurgerModal(props) {
                             cancelBurger(props.item, props.selected, props.setSelected);
                             closeModal();
                         }} className='font-medium bg-[#FFBF69] shadow-md rounded-2xl px-[6%] py-[1%]'>Cancel</button>
-                        <button onClick={() => closeModal()} className='font-medium bg-[#1B1A1A] text-white shadow-md rounded-2xl px-[6%] py-[1%]'>Save</button>
+                        <button onClick={() => {
+                            saveBurger(props, cheese, egg, double);
+                            closeModal()
+                        }} className='font-medium bg-[#1B1A1A] text-white shadow-md rounded-2xl px-[6%] py-[1%]'>Save</button>
                     </div>
                 </div>
             </div>

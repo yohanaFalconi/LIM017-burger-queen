@@ -15,7 +15,7 @@ export const addProduct = (props, burgerPrice) => {
     }
 }
 
-export const subtractProduct = (props) => {
+export const subtractProduct = (props, burgerPrice) => {
     const selected = props.selected;
     const id = props.item.id;
     // reduce solo funciona si el array de selected está lleno >0, como ya le dieron click a + entonces contiene algo
@@ -26,7 +26,11 @@ export const subtractProduct = (props) => {
         // Si los id´s son iguales que reste -1
         if (element.id === id) {
             element.data.Count = element.data.Count - 1;
-            props.item.data.LocalTotal = props.item.data.Count * props.item.data.Price; // esto es para la función total
+            if (props.item.data.Type === 'Burger') {
+                props.item.data.LocalTotal = props.item.data.Count * burgerPrice;
+            } else {
+                props.item.data.LocalTotal = props.item.data.Count * props.item.data.Price;
+            } // esto es para la función total
         }
         //Aún el acumulador está vacío, por eso le diremos que si contiene algún elemento (osea, >0) que lo acumule
         // push() agregará los "elements" al ARRAY VACÍO que tenemos (osea, acum)
@@ -101,6 +105,17 @@ export const handleExtras = (cheese, setCheese, egg, setEgg, double, setDouble, 
     }
 }
 
+export const saveBurger = (props, cheese, egg, double) => {
+    console.log('before saving', props.item.data);
+    cheese ? props.item.data.Cheese = true : props.item.data.Cheese = false;
+    if (egg) {
+        props.item.data.Egg = true;
+    }
+    if (double) {
+        props.item.data.Double = true;
+    }
+    console.log('after saving', props.item.data);
+}
 // messages for tomorrow Megan
 // go to firestore and create a new property (CustomPrice)
     // that's how you can reset the price, you just = it to Price
