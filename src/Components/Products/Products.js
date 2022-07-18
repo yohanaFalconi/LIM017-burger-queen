@@ -1,4 +1,4 @@
-import { menuCollectionRef } from '../../firebase-utils';
+import { menuCollectionRef } from '../../lib/firebase-utils';
 import { getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import ProductItem from '../ProductItem/ProductItem';
