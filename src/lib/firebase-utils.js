@@ -32,11 +32,11 @@ export const orderDataList = (state, callback) => {
 }
 
 // Actualiza el estado de la orden
-export const updateStatus = (documentId, data) => {
-  const ref = doc(ordersCollectionRef, documentId);
+export const updateStatus = (docId, data) => {
+  const ref = doc(ordersCollectionRef, docId);
   updateDoc(ref, {
     ...data,
-    update_time: new Date().toLocaleString('es-PE')
+    completedTime: new Date().toLocaleString('es-PE')
   });
 };
 

@@ -1,9 +1,9 @@
-import {orderDataList} from '../../lib/firebase-utils'
+import {orderCompleted}  from '../../ChefViewUtils'
 import { useEffect, useState } from 'react';
 import React from 'react';
 import  OrderedItems from '../OrderedItems/OrderedItems'
-export default function PendingOrders (props) {
 
+export default function PendingOrders (props) {
     return (
        <React.Fragment key={props.item.id}>
             <div className="bg-[#FFBF69] shadow-md rounded-2xl font-poppins font-light h-[100%]">
@@ -19,7 +19,7 @@ export default function PendingOrders (props) {
                 </div>
                 
                 <div>
-                    <button className='font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%] w-[20vw] '>Mark as ready</button>    
+                    <button onClick={() => orderCompleted(props.item.id, props.item.data)} className='font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%] w-[20vw] '>Mark as ready</button>    
                 </div> 
 
 

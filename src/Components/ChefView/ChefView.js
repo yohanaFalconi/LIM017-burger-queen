@@ -4,9 +4,12 @@ import bqlogo from '../../assets/bqlogo.png';
 import PendingOrders from '../PendingOrders/PendingOrders'
 import { useEffect, useState } from 'react';
 import {orderDataList} from '../../lib/firebase-utils'
+import CompletedOrders from '../CompletedOrders/CompletedOrders'
 
 function ChefView() {
     const [orderList, setOrderList] = useState([]);
+    const [completedList, setCompletedList] = useState([]);
+
     useEffect(() => {
         orderDataList('pending', (querySnapshot) => {
             const items = querySnapshot.docs.map(doc => ({
@@ -16,6 +19,17 @@ function ChefView() {
             return setOrderList(items)
         })
     }, [])
+
+    useEffect(() => {
+        orderDataList('completed', (querySnapshot) => {
+            const items = querySnapshot.docs.map(doc => ({
+                data: doc.data(),
+                id: doc.id
+            }))
+            return setCompletedList(items)
+        })
+    }, [])
+
     return (
         <div className='bg-[#FAFAFA] WaiterView'>
             <header>
@@ -36,7 +50,14 @@ function ChefView() {
                  )}  
                 </main>
                 <aside className='aside bg-[#B5D6B2]'>
-                    <p>Orders Ready</p>
+                    {completedList.map(item => 
+                        <CompletedOrders
+                            key={item.id}
+                            item={item}
+                            completedList={completedList}
+                            setCompletedList={setCompletedList}
+                        />
+                    )}
                 </aside>    
             </div>
         </div>
