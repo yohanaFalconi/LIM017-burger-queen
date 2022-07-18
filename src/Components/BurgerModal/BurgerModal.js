@@ -23,13 +23,16 @@ export default function BurgerModal(props) {
     return(
         <div className='overlay'>
             <div className="modal bg-white grid grid-cols-2 shadow-md rounded-2xl text-center font-poppins font-light">
-                <div>
-                    <img src={props.item.data.url} alt={props.item.data.Name} className='h-[200px] mt-3 inline-grid' />
-                    <h4 className='font-medium text-lg'>{props.item.data.Name} ${props.item.data.Price}</h4>
+                <div className='my-[3vh]'>
+                    <img src={props.item.data.url} alt={props.item.data.Name} className='h-[200px] inline-grid' />
+                    <h4 className='font-medium text-xl'>{props.item.data.Name} ${props.item.data.Price}</h4>
                     <p>Size: {double ? 'Double + $3' : props.item.data.Size}</p>
                     <p>{cheese ? '+ extra cheese $1' : ''}</p>
                     <p>{egg ? '+ extra egg $1' : ''}</p>
-                    <p>{priceWithExtras}</p>
+                    <div className='bg-gray-200 font-medium shadow-md rounded-2xl w-[70%] my-[2vh] mx-[1vw] px-[6%] py-[1%] inline-grid grid-flow-col'>
+                        <p>Price with extras:</p>
+                        <p>${priceWithExtras}</p>
+                    </div>
                     <div className='flex justify-center my-[10px]'>
                         <button onClick={()=>
                             subtractProduct(props, priceWithExtras)
@@ -44,24 +47,31 @@ export default function BurgerModal(props) {
                         </button>
                     </div>
                 </div>
-                <div>
-                    <h4>Add extras</h4>
-                    <p>$1 Add cheese</p>
-                    <input type='checkbox' onChange={() => handleExtras(cheese, setCheese, egg, setEgg, double, setDouble, priceWithExtras, setPriceWithExtras, 'clickedCheese')}></input>
-                    <p>$1 Add egg</p>
-                    <input type='checkbox' onChange={() => handleExtras(cheese, setCheese, egg, setEgg, double, setDouble, priceWithExtras, setPriceWithExtras, 'clickedEgg')}></input>
-                    <hr/>
-                    <h4>Size up: make a double</h4>
-                    <input type='checkbox' onChange={() => handleExtras(cheese, setCheese, egg, setEgg, double, setDouble, priceWithExtras, setPriceWithExtras, 'clickedDouble')}></input>
-                    <div>
+                <div className='my-[4vh] mx-[1vw]'>
+                    <h4 className='text-lg font-medium'>Add extras</h4>
+                    <div className='bg-[#B5D6B2] shadow-md rounded-2xl w-[80%] my-[2vh] mx-[1vw] px-[6%] py-[1%] inline-grid grid-flow-col justify-between'>
+                        <p>$1 Add cheese</p>
+                        <input type='checkbox' onChange={() => handleExtras(cheese, setCheese, egg, setEgg, double, setDouble, priceWithExtras, setPriceWithExtras, 'clickedCheese')}></input>
+                    </div>
+                    <div className='bg-[#B5D6B2] shadow-md rounded-2xl w-[80%] my-[2vh] mx-[1vw] px-[6%] py-[1%] inline-grid grid-flow-col justify-between'>
+                        <p>$1 Add egg</p>
+                        <input type='checkbox' onChange={() => handleExtras(cheese, setCheese, egg, setEgg, double, setDouble, priceWithExtras, setPriceWithExtras, 'clickedEgg')}></input>
+                    </div>
+                    <hr className='my-[2vh]'/>
+                    <h4 className='text-lg font-medium'>Size up</h4>
+                    <div className='bg-[#B5D6B2] shadow-md rounded-2xl w-[80%] my-[2vh] mx-[1vw] px-[6%] py-[1%] inline-grid grid-flow-col justify-between'>
+                        <p>$3 Make a double</p>
+                        <input type='checkbox' onChange={() => handleExtras(cheese, setCheese, egg, setEgg, double, setDouble, priceWithExtras, setPriceWithExtras, 'clickedDouble')}></input>
+                    </div>
+                    <div className='mt-[11vh] grid grid-flow-col justify-evenly'>
                         <button onClick={() => {
                             cancelBurger(props.item, props.selected, props.setSelected);
                             closeModal();
-                        }} className='font-medium bg-[#FFBF69] shadow-md rounded-2xl px-[6%] py-[1%]'>Cancel</button>
+                        }} className='font-medium bg-[#FFBF69] w-[100px] shadow-md rounded-2xl px-[6%] py-[1%]'>Cancel</button>
                         <button onClick={() => {
                             saveBurger(props, cheese, egg, double);
                             closeModal()
-                        }} className='font-medium bg-[#1B1A1A] text-white shadow-md rounded-2xl px-[6%] py-[1%]'>Save</button>
+                        }} className='font-medium bg-[#1B1A1A] w-[80px] text-white shadow-md rounded-2xl px-[6%] py-[1%]'>Save</button>
                     </div>
                 </div>
             </div>
