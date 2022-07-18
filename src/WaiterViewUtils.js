@@ -1,6 +1,6 @@
 import { sendOrderInFirebase } from '../src/lib/firebase-utils'
 
-export const addProduct = (props) => {
+export const addProduct = (props, burgerPrice) => {
     const selected = props.selected;
     const id = props.item.id;
     const found = selected.some((product) => product.id === id);
@@ -10,16 +10,24 @@ export const addProduct = (props) => {
         props.setSelected([...selected]);
     }
     props.item.data.Count = props.item.data.Count + 1;
-    props.item.data.LocalTotal = props.item.data.Count * props.item.data.Price;
+    if (props.item.data.Type === 'Burger') {
+        props.item.data.LocalTotal = props.item.data.Count * burgerPrice;
+    } else {
+        props.item.data.LocalTotal = props.item.data.Count * props.item.data.Price;
+    }
 }
 
-export const subtractProduct = (props) => {
+export const subtractProduct = (props, burgerPrice) => {
     const selected = props.selected;
     const id = props.item.id;
     const nuevoProduct = selected.reduce((acum, element) => {
         if (element.id === id) {
             element.data.Count = element.data.Count - 1;
-            props.item.data.Total = props.item.data.Count * props.item.data.Price; // esto es para la función total
+            if (props.item.data.Type === 'Burger') {
+                props.item.data.LocalTotal = props.item.data.Count * burgerPrice;
+            } else {
+                props.item.data.LocalTotal = props.item.data.Count * props.item.data.Price;
+            } // esto es para la función total
         }
         if (element.data.Count > 0) {
             acum.push(element)
@@ -67,4 +75,54 @@ export const sendOrderToFireBase = (selected, setSelected, tableNumber, username
     console.log('order', newOrderFirebase )
     sendOrderInFirebase(newOrderFirebase);
     setSelected([])
+}
+
+export const cancelBurger = (item, selected, setSelected) => {
+    const id = item.id;
+    const found = selected.some((product) => product.id === id);
+    if (found) {
+        deleteProduct(item, selected, setSelected);
+    } else {
+        return;
+    }
+}
+
+export const handleExtras = (cheese, setCheese, egg, setEgg, double, setDouble, priceWithExtras, setPriceWithExtras, clicked) => {
+    if (clicked === 'clickedCheese') {
+        if (!cheese) {
+            setCheese(true);
+            setPriceWithExtras(priceWithExtras + 1);
+        } else if (cheese) {
+            setCheese(false);
+            setPriceWithExtras(priceWithExtras - 1);
+        }
+    } else if (clicked === 'clickedEgg') {
+        if (!egg) {
+            setEgg(true);
+            setPriceWithExtras(priceWithExtras + 1);
+        } else if (egg) {
+            setEgg(false);
+            setPriceWithExtras(priceWithExtras - 1);
+        }
+    } else {
+        if (!double) {
+            setDouble(true);
+            setPriceWithExtras(priceWithExtras + 3);
+        } else if (double) {
+            setDouble(false);
+            setPriceWithExtras(priceWithExtras - 3);
+        }
+    }
+}
+
+export const saveBurger = (props, cheese, egg, double) => {
+    console.log('before saving', props.item.data);
+    cheese ? props.item.data.Cheese = true : props.item.data.Cheese = false;
+    if (egg) {
+        props.item.data.Egg = true;
+    }
+    if (double) {
+        props.item.data.Double = true;
+    }
+    console.log('after saving', props.item.data);
 }
