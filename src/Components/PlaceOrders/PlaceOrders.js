@@ -7,6 +7,7 @@ import './PlaceOrders.css';
 export default function PlaceOrders(props) {
     const [ selected, setSelected ] = useState([]);
     const [ total, setTotal] = useState(0);
+    const [ tableNumber, setTableNumber] = useState(1)
     
     useEffect(() => {
         const result = selected.reduce((acum , ele) => {
@@ -32,6 +33,9 @@ export default function PlaceOrders(props) {
                     username={props.username}
                     total={total}
                     setTotal={setTotal}
+                    tableNumber={tableNumber}
+                    setTableNumber={setTableNumber}
+                    
                     />
                 </aside>
             </div>
