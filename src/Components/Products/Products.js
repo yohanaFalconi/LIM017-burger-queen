@@ -3,7 +3,7 @@ import { getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import ProductItem from '../ProductItem/ProductItem';
 
-function Products(props) {
+export default function Products(props) {
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState([]);
     useEffect(() => {
@@ -40,5 +40,3 @@ function Products(props) {
         </div>
     );
 }
-
-export default Products;
