@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    box-sizing: border-box;
+}
+
+.container-chefView{
+    display: grid;
+    grid-template-columns: 80vw 20vw;
+}
+.box-white {
+    @apply bg-[#FAFAFA] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%]
+}

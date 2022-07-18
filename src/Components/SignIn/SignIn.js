@@ -1,5 +1,5 @@
 import './SignIn.css';
-import { auth } from '../../firebase-config';
+import { auth } from '../../lib/firebase-config';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import logo from '../../assets/bqlogo.png';
 import Icon from "../../IcoMoon/Icon";

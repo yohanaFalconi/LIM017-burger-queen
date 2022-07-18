@@ -10,12 +10,15 @@ export default function OrderInvoice(props) {
             </div>
             <div className='bg-[#FAFAFA] shadow-md rounded-2xl mx-[1vw] mb-[2vh] px-[6%] py-[1%]'>
                 <label>Table:</label>
-                <select name="select" className='bg-[#FAFAFA]'>
-                    <option value="table1">1</option>
-                    <option value="table2">2</option>
-                    <option value="table3">3</option>
-                    <option value="table4">4</option>
-                    <option value="table5">5</option>
+                <select onChange={(e) => props.setTableNumber(e.target.value)} value={props.tableNumber} name="select" className='bg-[#FAFAFA]'>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
                 </select>
             </div>
             <hr className='w-[90%] mx-[5%]' />
@@ -33,10 +36,10 @@ export default function OrderInvoice(props) {
                     <p>${props.total}</p>
                 </div>
                 <div>
-                    <button onClick={()=> deleteAllProducts(props.selected, props.setSelected)}>
+                    <button onClick={()=> deleteAllProducts(props.selected, props.setSelected, props.tableNumber)}>
                         <Icon color="#1B1A1A" size={26} icon="bin" className='mx-[1.5vw]' />
                     </button>
-                    <button onClick={()=> sendOrderToFireBase(props.selected, props.setSelected, props.username, props.total)} className='font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%] w-[20vw] mr-3'>
+                    <button onClick={()=> sendOrderToFireBase(props.selected, props.setSelected, props.tableNumber, props.username, props.total)} className='font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%] w-[20vw]'>
                         Send order
                     </button>
                 </div>
