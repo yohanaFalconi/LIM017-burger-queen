@@ -52,6 +52,7 @@ export const deleteAllProducts = (selected, setSelected, setTableNumber) => {
     setTableNumber(1);
 }
 
+
 const orderNumber = () => {
     const now = Date.now().toString()
     const orderNum = now.substring(6, 10);
@@ -127,7 +128,3 @@ export const saveBurger = (props, cheese, egg, double) => {
     }
     console.log('after saving', props.item.data);
 }
-// messages for tomorrow Megan
-// go to firestore and create a new property (CustomPrice)
-    // that's how you can reset the price, you just = it to Price
-//cancel button should reset the price now too
