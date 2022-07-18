@@ -1,7 +1,7 @@
 import './WaiterNav.css';
 import bqlogo from '../../assets/bqlogo.png';
 import { useState, useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom';
     
 export default function WaiterNav() {
     const [placeOrdersState, setPlaceOrdersState] = useState('inactive');

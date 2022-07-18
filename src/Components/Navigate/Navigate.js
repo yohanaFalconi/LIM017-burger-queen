@@ -5,18 +5,18 @@ function Navigate() {
     return(
         <div className="burgerBg h-screen grid place-content-center">
             <div className='flex gap-16 mt-[-50px]'>
-                <button className='navBtn'>
-                    <Link to='/waiter-view/place-orders'>
+                <Link to='/waiter-view/place-orders'>
+                    <button className='navBtn'>
                         <p className='text-2xl'>I'm a waiter or waitress</p>
                         <p>Place orders</p>
-                    </Link>
-                </button>
-                <button className='navBtn'>
-                    <Link to='/chef-view'>
+                    </button>
+                </Link>
+                <Link to='/chef-view'>
+                    <button className='navBtn'>
                         <p className='text-2xl'>I'm a chef</p>
                         <p>See orders</p>
-                    </Link>
-                </button>   
+                    </button> 
+                </Link>
             </div>
         </div>
     );

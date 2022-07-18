@@ -13,14 +13,14 @@ export default function App() {
 
   return(
     <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<SignIn username={username} setUsername={setUsername} />} />
-          <Route exact path="/navigate" element={<Navigate/>} />
-          <Route exact path="/waiter-view" element={<PlaceOrders username={username} />} />
-          <Route exact path="/chef-view" element={<ChefView />} />
-          <Route exact path="/waiter-view/place-orders" element={<PlaceOrders username={username} />} />
-          <Route exact path="/waiter-view/ready-to-serve" element={<WaiterNav />} />
-        </Routes>
+      <Routes>
+        <Route exact path="/" element={<SignIn username={username} setUsername={setUsername} />} />
+        <Route exact path="/navigate" element={<Navigate/>} />
+        <Route exact path="/waiter-view" element={<PlaceOrders username={username} />} />
+        <Route exact path="/chef-view" element={<ChefView />} />
+        <Route exact path="/waiter-view/place-orders" element={<PlaceOrders username={username} />} />
+        <Route exact path="/waiter-view/ready-to-serve" element={<WaiterNav />} />
+      </Routes>
     </BrowserRouter>
   );
 }

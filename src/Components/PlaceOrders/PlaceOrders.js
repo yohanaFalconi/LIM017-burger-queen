@@ -35,7 +35,6 @@ export default function PlaceOrders(props) {
                     setTotal={setTotal}
                     tableNumber={tableNumber}
                     setTableNumber={setTableNumber}
-                    
                     />
                 </aside>
             </div>
