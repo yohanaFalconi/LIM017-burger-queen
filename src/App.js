@@ -17,7 +17,7 @@ export default function App() {
         <Route exact path="/" element={<SignIn username={username} setUsername={setUsername} />} />
         <Route exact path="/navigate" element={<Navigate/>} />
         <Route exact path="/waiter-view" element={<PlaceOrders username={username} />} />
-        <Route exact path="/chef-view" element={<ChefView />} />
+        <Route exact path="/chef-view" element={<ChefView username={username} />} />
         <Route exact path="/waiter-view/place-orders" element={<PlaceOrders username={username} />} />
         <Route exact path="/waiter-view/ready-to-serve" element={<WaiterNav />} />
       </Routes>

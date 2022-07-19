@@ -6,7 +6,7 @@ import { sortPendingOrders, sortCompletedOrders } from '../../lib/firebase-utils
 import CompletedOrders from '../CompletedOrders/CompletedOrders'
 import { useNavigate } from 'react-router-dom';
 
-export default function ChefView() {
+export default function ChefView(props) {
     const [orderList, setOrderList] = useState([]);
     const [completedList, setCompletedList] = useState([]);
 
@@ -35,7 +35,8 @@ export default function ChefView() {
     return (
         <div className='bg-[#FAFAFA] WaiterView'>
             <header className='grid grid-flow-col fixed top-0 w-[100vw] bg-[#FAFAFA]'>
-            <img src={bqlogo} alt='Burger Queen' className='h-[13vh] p-2 ml-3 cursor-pointer' onClick={() => nav('/navigate')}/>
+                <img src={bqlogo} alt='Burger Queen' className='h-[13vh] p-2 ml-3 cursor-pointer' onClick={() => nav('/navigate')}/>
+                <p className='font-poppins'>Logged in as: {props.username}</p>
                 <button className='justify-self-end self-center h-fit w-fit font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%] mr-8'>
                     Log out
                 </button>
@@ -52,7 +53,7 @@ export default function ChefView() {
                     )}
                 </main>
                 <aside className='aside bg-[#B5D6B2] rounded-l-2xl fixed right-0 w-[18vw] h-[80vh] overflow-auto'>
-                    <h4 className='font-poppins'>Marked as ready</h4>
+                    <h4 className='font-poppins'>Ready</h4>
                     <>{completedList.map(order =>
                         <CompletedOrders
                             key={order.id}
