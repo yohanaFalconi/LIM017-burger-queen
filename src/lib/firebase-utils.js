@@ -2,7 +2,7 @@ import { db } from './firebase-config'
 import { collection, doc, getDoc, addDoc,query,where, onSnapshot, orderBy,updateDoc } from './firebase-init';
 
 export const menuCollectionRef = collection(db, 'menu-items');
-const ordersCollectionRef = collection(db, 'ordered-items');
+const ordersCollectionRef = collection(db, 'order-items');
 
 export const getItemsById = (id) => {
   const docRef = doc(db, 'menu-items', id);
@@ -25,10 +25,13 @@ export const sendOrderInFirebase = (newOrder) => {
 };
 
 // funcion que escucha datos nuevos 
-export const orderDataList = (state, callback) => {
+export const sortPendingOrders = (state, callback) => {
   const data = query(ordersCollectionRef, where("state", "==", state), orderBy('date', 'desc'));
   return onSnapshot(data, callback);
-
+}
+export const sortCompletedOrders = (state, callback) => {
+  const data = query(ordersCollectionRef, where("state", "==", state), orderBy('completedTime', 'desc'));
+  return onSnapshot(data, callback);
 }
 
 // Actualiza el estado de la orden
@@ -36,6 +39,7 @@ export const updateStatus = (docId, data) => {
   const ref = doc(ordersCollectionRef, docId);
   updateDoc(ref, {
     ...data,
-    completedTime: new Date().toLocaleString('es-PE')
+    completedTime: new Date().toLocaleString('es-PE'),
+    completedSeconds: new Date() / 1000
   });
 };

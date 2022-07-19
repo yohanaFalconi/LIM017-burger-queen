@@ -2,7 +2,7 @@ import './ChefView.css'
 import bqlogo from '../../assets/bqlogo.png';
 import PendingOrders from '../PendingOrders/PendingOrders'
 import { useEffect, useState } from 'react';
-import {orderDataList} from '../../lib/firebase-utils'
+import { sortPendingOrders, sortCompletedOrders } from '../../lib/firebase-utils'
 import CompletedOrders from '../CompletedOrders/CompletedOrders'
 import { Link } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ export default function ChefView() {
     const [completedList, setCompletedList] = useState([]);
 
     useEffect(() => {
-        orderDataList('pending', (querySnapshot) => {
+        sortPendingOrders('pending', (querySnapshot) => {
             const items = querySnapshot.docs.map(doc => ({
                 data: doc.data(),
                 id: doc.id
@@ -21,7 +21,7 @@ export default function ChefView() {
     }, [])
 
     useEffect(() => {
-        orderDataList('completed', (querySnapshot) => {
+        sortCompletedOrders('completed', (querySnapshot) => {
             const items = querySnapshot.docs.map(doc => ({
                 data: doc.data(),
                 id: doc.id
@@ -51,15 +51,16 @@ export default function ChefView() {
                         />
                     )}
                 </main>
-                <aside className='aside bg-[#B5D6B2]'>
-                    {completedList.map(order =>
+                <aside className='aside bg-[#B5D6B2] rounded-l-2xl fixed right-0 w-[18vw] h-[80vh] overflow-auto'>
+                    <h4 className='font-poppins'>Marked as ready</h4>
+                    <>{completedList.map(order =>
                         <CompletedOrders
                             key={order.id}
                             order={order}
                             completedList={completedList}
                             setCompletedList={setCompletedList}
                         />
-                    )}
+                    )}</>
                 </aside>    
             </div>
         </div>
