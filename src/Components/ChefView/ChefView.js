@@ -4,7 +4,7 @@ import PendingOrders from '../PendingOrders/PendingOrders'
 import { useEffect, useState } from 'react';
 import { sortPendingOrders, sortCompletedOrders } from '../../lib/firebase-utils'
 import CompletedOrders from '../CompletedOrders/CompletedOrders'
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function ChefView() {
     const [orderList, setOrderList] = useState([]);
@@ -30,12 +30,12 @@ export default function ChefView() {
         })
     }, [])
 
+    const nav = useNavigate();
+
     return (
         <div className='bg-[#FAFAFA] WaiterView'>
             <header className='grid grid-flow-col fixed top-0 w-[100vw] bg-[#FAFAFA]'>
-                <Link to='/navigate'>
-                    <img src={bqlogo} alt='Burger Queen' className='h-[13vh] p-2 ml-3' />
-                </Link>
+            <img src={bqlogo} alt='Burger Queen' className='h-[13vh] p-2 ml-3 cursor-pointer' onClick={() => nav('/navigate')}/>
                 <button className='justify-self-end self-center h-fit w-fit font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%] mr-8'>
                     Log out
                 </button>
