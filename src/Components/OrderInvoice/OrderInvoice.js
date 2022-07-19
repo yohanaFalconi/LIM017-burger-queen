@@ -30,7 +30,7 @@ export default function OrderInvoice(props) {
                 />
             </div>
             <div className="fixed bottom-0 mb-[35px]">
-                <hr className='w-[90%] mx-[5%]' />
+                <hr className='w-[90%] mx-[5%]'/>
                 <div className='bg-[#FFBF69] shadow-md rounded-2xl my-[2vh] mx-[1vw] px-[6%] py-[1%] grid grid-flow-col justify-between'>
                     <p>Total:</p>
                     <p>${props.total}</p>

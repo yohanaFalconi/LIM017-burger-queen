@@ -1,5 +1,4 @@
-import { sendOrderInFirebase } from '../src/lib/firebase-utils'
-import { useState, useEffect } from 'react';
+import { sendOrderInFirebase } from '../src/lib/firebase-utils';
 
 export const addProduct = (props, burgerPrice) => {
     const selected = props.selected;

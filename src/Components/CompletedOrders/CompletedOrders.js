@@ -1,15 +1,11 @@
-import React from 'react';
-import { sortCompleted } from '../../ChefViewUtils';
+import { getTimeDiff } from '../../ChefViewUtils';
 
-function CompletedOrders(props) {
-
+export default function CompletedOrders(props) {
     return ( 
-        <React.Fragment>
-            <p>Order #{props.item.data.orderNumber}</p>
-            <p>Completed in: {sortCompleted(props.item.data.seconds, props.item.data.completedSeconds)} min</p>
-        </React.Fragment>
-
+        <div className="font-poppins">
+            <p>Order #{props.order.data.orderNumber}</p>
+            <p>Completed in: {getTimeDiff(props.order.data.seconds, props.order.data.completedSeconds)} min</p>
+            <hr></hr>
+        </div>
     )
 }
-
-export default CompletedOrders;

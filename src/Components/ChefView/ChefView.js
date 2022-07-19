@@ -1,17 +1,17 @@
 import './ChefView.css'
 import bqlogo from '../../assets/bqlogo.png';
-// import Icon from "../../IcoMoon/Icon";
 import PendingOrders from '../PendingOrders/PendingOrders'
 import { useEffect, useState } from 'react';
-import {orderDataList, orderDataCompleted} from '../../lib/firebase-utils'
+import { sortPendingOrders, sortCompletedOrders } from '../../lib/firebase-utils'
 import CompletedOrders from '../CompletedOrders/CompletedOrders'
+import { useNavigate } from 'react-router-dom';
 
-function ChefView() {
+export default function ChefView() {
     const [orderList, setOrderList] = useState([]);
     const [completedList, setCompletedList] = useState([]);
 
     useEffect(() => {
-        orderDataList('pending', (querySnapshot) => {
+        sortPendingOrders('pending', (querySnapshot) => {
             const items = querySnapshot.docs.map(doc => ({
                 data: doc.data(),
                 id: doc.id
@@ -21,7 +21,7 @@ function ChefView() {
     }, [])
 
     useEffect(() => {
-        orderDataCompleted('completed', (querySnapshot) => {
+        sortCompletedOrders('completed', (querySnapshot) => {
             const items = querySnapshot.docs.map(doc => ({
                 data: doc.data(),
                 id: doc.id
@@ -30,38 +30,39 @@ function ChefView() {
         })
     }, [])
 
+    const nav = useNavigate();
+
     return (
         <div className='bg-[#FAFAFA] WaiterView'>
-            <header>
-            <img src={bqlogo} alt='Burger Queen' className='h-20 ml-4 mt-3' />
-                <nav>
-                    <button>Click me</button>
-                </nav>
+            <header className='grid grid-flow-col fixed top-0 w-[100vw] bg-[#FAFAFA]'>
+            <img src={bqlogo} alt='Burger Queen' className='h-[13vh] p-2 ml-3 cursor-pointer' onClick={() => nav('/navigate')}/>
+                <button className='justify-self-end self-center h-fit w-fit font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%] mr-8'>
+                    Log out
+                </button>
             </header>
-            <div className='container-chefView'>
+            <div className='container-chefView mt-[13vh]'>
                 <main className='main grid grid-cols-3 gap-5 m-5'>
-                    {orderList.map(item => 
+                    {orderList.map(order => 
                         <PendingOrders
-                         key={item.id}
-                         item={item}
-                         orderList={orderList}
-                         setOrderList={setOrderList}
+                            key={order.id}
+                            order={order}
+                            orderList={orderList}
+                            setOrderList={setOrderList}
                         />
-                 )}  
+                    )}
                 </main>
-                <aside className='aside bg-[#B5D6B2]'>
-                    {completedList.map(item => 
+                <aside className='aside bg-[#B5D6B2] rounded-l-2xl fixed right-0 w-[18vw] h-[80vh] overflow-auto'>
+                    <h4 className='font-poppins'>Marked as ready</h4>
+                    <>{completedList.map(order =>
                         <CompletedOrders
-                            key={item.id}
-                            item={item}
+                            key={order.id}
+                            order={order}
                             completedList={completedList}
                             setCompletedList={setCompletedList}
                         />
-                    )}
+                    )}</>
                 </aside>    
             </div>
         </div>
     );
 }
-
-export default ChefView;

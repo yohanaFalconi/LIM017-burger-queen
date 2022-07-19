@@ -7,9 +7,9 @@ const ordersCollectionRef = collection(db, 'order-items');
 export const getItemsById = (id) => {
   const docRef = doc(db, 'menu-items', id);
   const docSnap = getDoc(docRef).then((item) => {
-        return {
-            id: item.id,
-            data: item.data()
+    return {
+      id: item.id,
+      data: item.data()
   }}).catch((err) => {console.log(err.message)});
   return docSnap;
 };
@@ -25,15 +25,13 @@ export const sendOrderInFirebase = (newOrder) => {
 };
 
 // funcion que escucha datos nuevos 
-export const orderDataList = (state, callback) => {
+export const sortPendingOrders = (state, callback) => {
   const data = query(ordersCollectionRef, where("state", "==", state), orderBy('date', 'desc'));
   return onSnapshot(data, callback);
-
 }
-export const orderDataCompleted = (state, callback) => {
+export const sortCompletedOrders = (state, callback) => {
   const data = query(ordersCollectionRef, where("state", "==", state), orderBy('completedTime', 'desc'));
   return onSnapshot(data, callback);
-
 }
 
 // Actualiza el estado de la orden
@@ -45,7 +43,3 @@ export const updateStatus = (docId, data) => {
     completedSeconds: new Date() / 1000
   });
 };
-
-
-
-
