@@ -1,4 +1,5 @@
 import { sendOrderInFirebase } from '../src/lib/firebase-utils'
+import { useState, useEffect } from 'react';
 
 export const addProduct = (props, burgerPrice) => {
     const selected = props.selected;
@@ -62,11 +63,13 @@ const orderNumber = () => {
 }
 
 export const sendOrderToFireBase = (selected, setSelected, tableNumber, username, total) => {
+
     console.log('envio')
     const newOrderFirebase = {
         orderNumber : orderNumber(),
         initTime : new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds(),
-        date: new Date().toLocaleString('es-PE'),
+        seconds : new Date()/ 1000, //  la marca de tiempo en segundos
+        date: new Date().toLocaleString('es-PE'), // sin esto no puedo ordenar la data
         worker: username,
         table: tableNumber,
         total: total,
@@ -75,6 +78,7 @@ export const sendOrderToFireBase = (selected, setSelected, tableNumber, username
     }
     console.log('order', newOrderFirebase )
     sendOrderInFirebase(newOrderFirebase);
+    selected.forEach( item => item.data.Count = 0)
     setSelected([])
 }
 
