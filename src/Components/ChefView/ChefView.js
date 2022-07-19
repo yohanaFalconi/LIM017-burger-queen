@@ -3,7 +3,7 @@ import bqlogo from '../../assets/bqlogo.png';
 // import Icon from "../../IcoMoon/Icon";
 import PendingOrders from '../PendingOrders/PendingOrders'
 import { useEffect, useState } from 'react';
-import {orderDataList} from '../../lib/firebase-utils'
+import {orderDataList, orderDataCompleted} from '../../lib/firebase-utils'
 import CompletedOrders from '../CompletedOrders/CompletedOrders'
 
 function ChefView() {
@@ -21,7 +21,7 @@ function ChefView() {
     }, [])
 
     useEffect(() => {
-        orderDataList('completed', (querySnapshot) => {
+        orderDataCompleted('completed', (querySnapshot) => {
             const items = querySnapshot.docs.map(doc => ({
                 data: doc.data(),
                 id: doc.id
