@@ -42,20 +42,20 @@ export default function ChefView() {
             </header>
             <div className='container-chefView mt-[13vh]'>
                 <main className='main grid grid-cols-3 gap-5 m-5'>
-                    {orderList.map(item => 
+                    {orderList.map(order => 
                         <PendingOrders
-                         key={item.id}
-                         item={item}
-                         orderList={orderList}
-                         setOrderList={setOrderList}
+                            key={order.id}
+                            order={order}
+                            orderList={orderList}
+                            setOrderList={setOrderList}
                         />
-                    )}  
+                    )}
                 </main>
                 <aside className='aside bg-[#B5D6B2]'>
-                    {completedList.map(item => 
+                    {completedList.map(order =>
                         <CompletedOrders
-                            key={item.id}
-                            item={item}
+                            key={order.id}
+                            order={order}
                             completedList={completedList}
                             setCompletedList={setCompletedList}
                         />

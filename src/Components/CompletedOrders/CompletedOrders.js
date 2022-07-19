@@ -1,14 +1,10 @@
-import React from 'react';
-
-function CompletedOrders(props) {
+export default function CompletedOrders(props) {
     return ( 
-        <React.Fragment>
-            <p>Order #{props.item.data.orderNumber}</p>
-            <p>{props.item.data.initTime}</p>
-            <p>{props.item.data.completedTime}</p>
-        </React.Fragment>
-
+        <div className="font-poppins">
+            <p>Order #{props.order.data.orderNumber}</p>
+            <p>Sent to kitchen at: {props.order.data.initTime}</p>
+            {/* <p>Completed at: {props.order.data.completedTime}</p> */}
+            <hr></hr>
+        </ div>
     )
 }
-
-export default CompletedOrders;

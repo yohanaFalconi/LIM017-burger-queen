@@ -1,13 +1,14 @@
 import './WaiterNav.css';
 import bqlogo from '../../assets/bqlogo.png';
 import { useState, useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
     
 export default function WaiterNav() {
     const [placeOrdersState, setPlaceOrdersState] = useState('inactive');
     const [readyServeState, setReadyServeState] = useState('inactive');
 
     let location = useLocation().pathname;
+    const nav = useNavigate();
 
     useEffect(() => {
         switch (location) {
@@ -30,21 +31,19 @@ export default function WaiterNav() {
 
     return (
         <header className='grid grid-flow-col fixed top-0 w-[100vw] bg-[#FAFAFA]'>
-            <Link to='/navigate'>
-                <img src={bqlogo} alt='Burger Queen' className='h-[13vh] p-2 ml-3' />
-            </Link>
+            <img src={bqlogo} alt='Burger Queen' className='h-[13vh] p-2 ml-3 cursor-pointer' onClick={() => nav('/navigate')}/>
             <nav className='self-center mr-4 flex justify-evenly'>
-                <button className={placeOrdersState}>
-                    <Link to='/waiter-view/place-orders'>
+                <Link to='/waiter-view/place-orders'>
+                    <button className={placeOrdersState}>
                         Place orders
-                    </Link>
-                </button>
-                <button className={readyServeState}>
-                    <Link to='/waiter-view/ready-to-serve'>
+                    </button>
+                </Link>
+                <Link to='/waiter-view/ready-to-serve'>
+                    <button className={readyServeState}>
                         See ready to serve
-                    </Link>
-                </button>
-                <button className='font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%]'>
+                    </button>
+                </Link>
+                <button className='w-max h-min font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[3%] py-[1%]'>
                     Log out
                 </button>
             </nav>
