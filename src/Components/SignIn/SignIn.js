@@ -1,6 +1,7 @@
 import './SignIn.css';
 import { auth } from '../../lib/firebase-config';
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+//import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "../../lib/firebase-init"
 import logo from '../../assets/bqlogo.png';
 import Icon from "../../IcoMoon/Icon";
 import { useNavigate } from "react-router-dom";

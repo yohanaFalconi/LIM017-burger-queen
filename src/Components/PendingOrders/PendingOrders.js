@@ -1,5 +1,4 @@
 import {orderCompleted}  from '../../ChefViewUtils'
-import { useEffect, useState } from 'react';
 import React from 'react';
 import  OrderedItems from '../OrderedItems/OrderedItems'
 
