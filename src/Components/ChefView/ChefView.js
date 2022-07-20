@@ -1,10 +1,11 @@
 import './ChefView.css'
 import bqlogo from '../../assets/bqlogo.png';
-import PendingOrders from '../PendingOrders/PendingOrders'
+import FullOrders from '../FullOrders/FullOrders';
 import { useEffect, useState } from 'react';
-import { sortPendingOrders, sortCompletedOrders } from '../../lib/firebase-utils'
-import CompletedOrders from '../CompletedOrders/CompletedOrders'
+import { sortPendingOrders, sortCompletedOrders } from '../../lib/firebase-utils';
+import CompletedOrders from '../CompletedOrders/CompletedOrders';
 import { useNavigate } from 'react-router-dom';
+import { completeOrder } from '../../ChefViewUtils';
 
 export default function ChefView(props) {
     const [orderList, setOrderList] = useState([]);
@@ -44,11 +45,10 @@ export default function ChefView(props) {
             <div className='container-chefView mt-[13vh]'>
                 <main className='main grid grid-cols-3 gap-5 m-5'>
                     {orderList.map(order => 
-                        <PendingOrders
-                            key={order.id}
+                        <FullOrders
                             order={order}
-                            orderList={orderList}
-                            setOrderList={setOrderList}
+                            updateStatus={completeOrder}
+                            class='pending'
                         />
                     )}
                 </main>

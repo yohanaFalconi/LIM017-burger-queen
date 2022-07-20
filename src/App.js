@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from './Components/SignIn/SignIn';
-import WaiterNav from './Components/WaiterNav/WaiterNav';
+import ReadyToServe from './Components/ReadyToServe/ReadyToServe';
 import Navigate from './Components/Navigate/Navigate';
 import ChefView from './Components/ChefView/ChefView';
 import PlaceOrders from './Components/PlaceOrders/PlaceOrders';
@@ -19,7 +19,7 @@ export default function App() {
         <Route exact path="/waiter-view" element={<PlaceOrders username={username} />} />
         <Route exact path="/chef-view" element={<ChefView username={username} />} />
         <Route exact path="/waiter-view/place-orders" element={<PlaceOrders username={username} />} />
-        <Route exact path="/waiter-view/ready-to-serve" element={<WaiterNav />} />
+        <Route exact path="/waiter-view/ready-to-serve" element={<ReadyToServe />} />
       </Routes>
     </BrowserRouter>
   );
