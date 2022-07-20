@@ -1,5 +1,5 @@
 import { db } from './firebase-config'
-import { collection, doc, getDoc, addDoc,query,where, onSnapshot, orderBy,updateDoc } from './firebase-init';
+import { collection, doc, getDoc, addDoc, query, where, onSnapshot, orderBy, updateDoc } from './firebase-init';
 
 export const menuCollectionRef = collection(db, 'menu-items');
 const ordersCollectionRef = collection(db, 'order-items');

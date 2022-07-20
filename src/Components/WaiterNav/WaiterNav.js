@@ -2,8 +2,10 @@ import './WaiterNav.css';
 import bqlogo from '../../assets/bqlogo.png';
 import { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { auth } from '../../lib/firebase-config';
+import { signOut } from "firebase/auth";
     
-export default function WaiterNav() {
+export default function WaiterNav(props) {
     const [placeOrdersState, setPlaceOrdersState] = useState('inactive');
     const [readyServeState, setReadyServeState] = useState('inactive');
 
@@ -43,7 +45,14 @@ export default function WaiterNav() {
                         See ready to serve
                     </button>
                 </Link>
-                <button className='w-max h-min font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[3%] py-[1%]'>
+                <button onClick={() => {
+                    signOut(auth).then(() => {
+                        nav('/');
+                        props.setUsername('');
+                        console.log(props.username);
+                    }).catch(error => console.log(error));
+                }}
+                    className='w-max h-min font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[3%] py-[1%]'>
                     Log out
                 </button>
             </nav>

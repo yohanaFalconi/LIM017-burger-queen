@@ -18,7 +18,10 @@ export default function PlaceOrders(props) {
 
     return (
         <div className='bg-[#FAFAFA] h-screen'>
-            <WaiterNav />
+            <WaiterNav
+                setUsername={props.setUsername}
+                username={props.username}
+            />
             <div className='container mt-[13vh]'>
                 <main>
                     <Products
