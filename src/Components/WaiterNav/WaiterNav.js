@@ -48,8 +48,7 @@ export default function WaiterNav(props) {
                 <button onClick={() => {
                     signOut(auth).then(() => {
                         nav('/');
-                        props.setUsername('');
-                        console.log(props.username);
+                        props.setUsername(undefined);
                     }).catch(error => console.log(error));
                 }}
                     className='w-max h-min font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[3%] py-[1%]'>

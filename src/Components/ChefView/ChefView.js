@@ -6,6 +6,8 @@ import { sortPendingOrders, sortCompletedOrders } from '../../lib/firebase-utils
 import CompletedOrders from '../CompletedOrders/CompletedOrders';
 import { useNavigate } from 'react-router-dom';
 import { completeOrder } from '../../ChefViewUtils';
+import { auth } from '../../lib/firebase-config';
+import { signOut } from "firebase/auth";
 
 export default function ChefView(props) {
     const [orderList, setOrderList] = useState([]);
@@ -38,7 +40,13 @@ export default function ChefView(props) {
             <header className='grid grid-flow-col fixed top-0 w-[100vw] bg-[#FAFAFA]'>
                 <img src={bqlogo} alt='Burger Queen' className='h-[13vh] p-2 ml-3 cursor-pointer' onClick={() => nav('/navigate')}/>
                 <p className='font-poppins'>Logged in as: {props.username}</p>
-                <button className='justify-self-end self-center h-fit w-fit font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%] mr-8'>
+                <button onClick={() => {
+                    signOut(auth).then(() => {
+                        nav('/');
+                        props.setUsername(undefined);
+                    }).catch(error => console.log(error));
+                }}
+                    className='justify-self-end self-center h-fit w-fit font-medium bg-[#1B1A1A] hover:bg-[#FE9C08] text-white shadow-md rounded-2xl px-[6%] py-[1%] mr-8'>
                     Log out
                 </button>
             </header>
