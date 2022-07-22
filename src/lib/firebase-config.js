@@ -1,5 +1,5 @@
 
-import { initializeApp, getAuth, getFirestore } from './firebase-init';
+//import { initializeApp, getAuth, getFirestore } from './firebase-init';
 
 // import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
@@ -7,7 +7,7 @@ import { initializeApp, getAuth, getFirestore } from './firebase-init';
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+/*const firebaseConfig = {
   apiKey: "AIzaSyBIitZTP56EFI4XfTgT--6pPnaRJl3sWl8",
   authDomain: "burgerqueen-2a96a.firebaseapp.com",
   projectId: "burgerqueen-2a96a",
@@ -25,4 +25,4 @@ export const auth = getAuth(app);
 // export const logInGoogle = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore(app);
-
+*/

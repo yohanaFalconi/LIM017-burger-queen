@@ -1,5 +1,5 @@
 import './SignIn.css';
-import { auth } from '../../lib/firebase-config';
+import { auth } from '../../lib/firebase-utils';
 //import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { GoogleAuthProvider, signInWithPopup } from "../../lib/firebase-init"
 import logo from '../../assets/bqlogo.png';
@@ -11,10 +11,12 @@ function SignIn(props) {
     const nav = useNavigate();
     const handleGoogleSingin = () => {
         const provider = new GoogleAuthProvider();
+        console.log(signInWithPopup())
         return (signInWithPopup(auth, provider)
         .then((result) => {
+            console.log('aqui',result)
             props.setUsername(result.user.displayName);
-            console.log('username state passed as prop:', props.username);
+            //console.log('username state passed as prop:', props.username);
             nav('/navigate')})
         .catch((error) => {console.log(error)}));
     }
