@@ -56,8 +56,6 @@ export const deleteAllProducts = (selected, setSelected, setTableNumber) => {
 const orderNumber = () => {
     const now = Date.now().toString()
     const orderNum = now.substring(6, 10);
-    /*const date = new Date();
-    const time = date.getTime().substring(6, 12);*/
     return orderNum;
 }
 

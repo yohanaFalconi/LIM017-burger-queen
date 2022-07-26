@@ -13,7 +13,6 @@ function SignIn(props) {
         return (signInWithPopup(auth, provider)
         .then((result) => {
             props.setUsername(result.user.displayName);
-            console.log('username state passed as prop:', props.username);
             nav('/navigate')})
         .catch((error) => {console.log(error)}));
     }
