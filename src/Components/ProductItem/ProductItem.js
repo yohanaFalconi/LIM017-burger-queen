@@ -3,9 +3,8 @@ import Icon from "../../IcoMoon/Icon";
 import { addProduct, subtractProduct } from '../../WaiterViewUtils.js';
 import BurgerModal from "../BurgerModal/BurgerModal";
 
-export default function ProductItem(props) {
+export default function ProductItem({props}) {
     const [showModal, setShowModal] = useState(false);
-
     if (props.item.data.Type === 'Burger') {
         return(
             <>

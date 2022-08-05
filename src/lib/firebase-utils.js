@@ -1,5 +1,5 @@
 //import { auth, db } from './firebase-config'
-import { initializeApp, getAuth, getFirestore, GoogleAuthProvider, signInWithPopup, collection, doc, getDoc, addDoc,query,where, onSnapshot, orderBy,updateDoc } from './firebase-init';
+import { initializeApp, getAuth, getFirestore, collection, doc, getDoc, addDoc,query,where, onSnapshot, orderBy,updateDoc } from './firebase-init';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBIitZTP56EFI4XfTgT--6pPnaRJl3sWl8",
