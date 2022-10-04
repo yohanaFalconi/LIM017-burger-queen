@@ -1,0 +1,7 @@
+.pending {
+    @apply bg-[#FFBF69] shadow-md rounded-2xl font-poppins font-light h-max;
+}
+
+.completed {
+    @apply bg-[#B5D6B2] shadow-md rounded-2xl font-poppins font-light h-max mt-2;
+}

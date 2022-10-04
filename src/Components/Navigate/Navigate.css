@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navBtn {
+    @apply w-64 gap-5 py-4 stroke-current bg-inherit rounded-3xl text-lg bg-[#323131] text-[#FFFFFF] hover:bg-[#FE9C08] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)];
+    height: 150%;
+    width: 300px;
+}

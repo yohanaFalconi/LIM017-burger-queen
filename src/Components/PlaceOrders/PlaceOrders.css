@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 69vw 28vw;
+}
+
